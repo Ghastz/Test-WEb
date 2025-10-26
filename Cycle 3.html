@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Portofolio</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-image: url('');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed; /* bg gk gerak */
+  margin: 0;
+  padding: 0;
+  padding-bottom: 60px;
+    }
+    header {
+      background-color: #626862;
+      color: white;
+      text-align: center;
+      padding: 20px;
+		margin-top: 40px;
+    }
+    nav {
+      position: fixed;
+  	  top: 0;
+  	  left: 0;
+  	  width: 100%;
+  	  background-color: #333;
+      display: flex;
+      justify-content: center;
+      z-index: 1000; /* mastiin biar diatas kontennya */
+    }
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s;
+    }
+    nav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    /* Section base style */
+    section {
+      opacity: 0;
+      transform: scale(0.98);
+      pointer-events: none;
+      position: absolute;   /*klo di relative in malah spacing nya jauh jir*/            
+      top: 50px;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      transition: transform 0.6s ease;
+      min-height: 1600px; /*buat ngatur panjang isinya*/
+	  scroll-behavior: smooth;
+	  scroll-margin-top: 600px;
+    }
+
+    /* Saat target aktif (via anchor) */
+    section:target {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+      position: relative;
+    }
+
+    /* Default tampilan saat pertama kali (home) */
+	body:not(:has(:target)) #home {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  position: relative;
+}
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+/*Kebawah style buat yg bagian Profile*/	
+	.profile-pic-right {
+  float: right;
+  width: 220px;          /* adjust size */
+  margin-left: 20px;     /* spacing between image and text */
+  margin-bottom: 10px;   /* spacing below image */
+  border-radius: 10px;
+}
+	
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Selamat datang di Website Portofolio Saya!</h1>
+    <p>Silahkan Mengunjungi Tab Dibawah Ini</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#profile">Profile</a>
+    <a href="#portofolio">Portofolio</a>
+    <a href="#askme">Ask me!</a>
+</nav>
+
+  <section id="home">
+    <center><h2>Halaman Utama</h2>
+    <p>Halo adik adik.</p>
+  <img src="nba-los-angeles-lakers-media-day-737381.jpg" alt="" width="154" height="90"/>
+	</center>
+</section>
+
+  <section id="profile">
+    <h2>Profile</h2>
+    <p>Saya adalah salah satu mahasiswa di STMIK LIKMI angkatan 2025, Saya mempunyai keterampilan dalam Software, Hardware, dan Jaringan seperti Rakit PC, Troubleshooting Jaringan, Instalasi Perangkat, dan Jaringan Komputer.
+ </p>
+    <p><strong>Experience</strong></p>	  <img src="Pas foto formal 2025.jpg" alt="" width="200" class="profile-pic-right"/>
+
+	  <ul>
+	  <li><strong>PT.Linknet Project Diskominfo</strong></li>
+		  <strong>Freelance | Network Field Engineering <u>(January 2022 – April 2022)</u></strong>
+		  <p>Melakukan instalasi perangkat seperti router dan access point yang sesuai dengan topologi jaringan di beberapa tempat disekitaran Bandung Kota sesuai.</p>
+	  <li><strong>Dislitbangau</strong></li>	
+		  <strong>Internship | IT Support <u>(July-Oktober 2022)</u></strong>
+		  <p>Monitoring jaringan di 3 bangunan inti, Maintenancing Hardware dan Software, Membantu bagian PNS dalam tugas printing, simple editing dll.</p>
+	  <li><strong>QSA Computer</strong></li>
+		  <strong>Staff | Technician <u>(November 2023 - Februari 2024)</u></strong>
+		  <p>Melakukan perakitan Komputer dan service Laptop, Marketing barang jualan seperti laptop dll, dan juga membina siswa yang sedang melakukan PKL. </p>
+	  </ul>
+	  <p><strong>Education</strong></p>
+	  <ul>
+	  <li><p><strong>Teknik Komputer dan Jaringan | SMK ICB Cinta Teknika Bandung <u>(2020 – 2023)</u></strong></p></li>
+	  <li><p><strong>Technology Information (Informatics and AI Technology) | STMIK LIKMI <u>(2025 (ongoing))</u></strong></p></li>
+	  </ul>
+ 
+</section>
+
+  <section id="portofolio">
+    <h2>Portofolio</h2>
+    <p>Saya punya sertifikat mtcna.</p>
+  </section>
+
+<section id="askme">
+    <h2>Ask Me !</h2>
+    <p>Jika ada pertanyaan, silakan kirim email ke: <a href="mailto:stackedbox01@gmail.com">stackedbox01@gmail.com</a></p>
+  </section>
+
+  <footer>
+    <p>Sosial Media </p>
+    <a href="https://www.instagram.com/ghast_z/" target="_blank"><img src="pngtree-instagram-icon-png-image_6315974.png" alt="" width="30" height="30"/></a> <img src="WhatsApp.svg.png" alt="" width="30"/> <a href="https://www.tiktok.com/@nowayout21" target="_blank"><img src="tiktok221.png" alt="" width="30"/></a>
+	</footer>
+
+</body>
+</html>

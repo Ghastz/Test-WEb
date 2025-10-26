@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaza Zakian - Portfolio</title>
+  <link rel="icon" href="animatedlogo.gif" />
+  <style>
+    /* ====== GLOBAL ====== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #111, #2b2b2b);
+      color: #eee;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+	/* Prevent any horizontal overflow */
+	html, body {
+      overflow-x: hidden;
+      width: 100%;
+	}
+    /* ====== NAVBAR ====== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(20, 20, 20, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 15px 0;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+    }
+
+    nav img {
+      position: absolute;
+      left: 40px;
+      height: 45px;
+      width: auto;
+    }
+
+    nav a {
+      color: #ddd;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    /* ====== SECTION BASE ====== */
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 120px 10% 80px;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+  	  argin-left: auto;
+      margin-right: auto;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    section:target {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      position: relative;
+    }
+
+    body:not(:has(:target)) #home {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      position: relative;
+    }
+
+    /* ====== HOME ====== */
+    #home {
+      background: linear-gradient(160deg, #1a1a1a, #111);
+	  min-height: 100vh;
+  	  display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 0;
+      margin-bottom: 0;
+      overflow: hidden;
+    }
+
+    .hero-container {
+	  margin-top: -150px;	
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+      max-width: 1100px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-text {
+      flex: 1.3;
+      text-align: left;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .hero-text p {
+      color: #ccc;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #444;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #666;
+    }
+
+    .hero-profile {
+      flex: 1;
+      text-align: center;
+    }
+
+    .hero-profile img {
+      width: 180px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      margin-bottom: 10px;
+    }
+
+    /* ====== PROFILE ====== */
+    #profile {
+      background: linear-gradient(160deg, #202020, #111);
+      text-align: left;
+    }
+
+    .profile-container {
+	  margin-top: -68px;	
+      max-width: 1000px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 50px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .profile-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .profile-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .profile-left {
+      flex: 2;
+      min-width: 300px;
+    }
+
+    .profile-right {
+      flex: 1;
+      min-width: 250px;
+      text-align: center;
+    }
+
+    .profile-right img {
+      width: 150px;
+      border-radius: 10px;
+
+      margin-bottom: 10px;
+    }
+
+    .skills ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .skills li {
+      background: #2b2b2b;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      color: #ddd;
+    }
+
+    /* ====== PORTFOLIO ====== */
+    #portfolio {
+      background: linear-gradient(160deg, #1b1b1b, #0f0f0f);
+    }
+
+    .port-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 30px;
+      margin: 20px 0;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ====== ASK ME ====== */
+    #askme {
+      background: linear-gradient(160deg, #222, #111);
+    }
+
+    #askme a {
+      color: #61dafb;
+      font-weight: 600;
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: rgba(20, 20, 20, 0.95);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      padding: 15px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 0.9em;
+      backdrop-filter: blur(6px);
+    }
+
+    footer a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: white;
+    }
+
+    footer img {
+      width: 22px;
+      height: 22px;
+      filter: brightness(100%);
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      nav img { left: 20px; }
+      .hero-container { flex-direction: column; text-align: center; }
+      .hero-text { text-align: center; }
+      .profile-grid { flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <img src="animatedlogo.gif" alt="Logo Gaza" />
+    <a href="#home">Home</a>
+    <a href="#profile">Profile</a>
+    <a href="#portfolio">Portofolio</a>
+    <a href="#askme">Ask Me</a>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="hero-container">
+      <div class="hero-text">
+        <h1>Welcome to Gaza's Portfolio</h1>
+        <p>
+          Halo, saya <strong>Gaza Zakian</strong>, mahasiswa STMIK LIKMI yang tertarik pada dunia
+          teknologi — khususnya dibidang <strong>Artificial Intelligence</strong>.
+        </p>
+        <p>
+          Yuk, jelajahi Profile saya dengan mengklik gambar disamping dan klik tombol Portofolio dibawah ini untuk melihat perjalanan dan keterampilan yang saya kembangkan sejauh ini.
+        </p>
+        <a href="#portfolio" class="btn">Lihat Portfolio</a>
+      </div>
+
+      <div class="hero-profile"> <a href="#profile"><img src="904715035-IMG-20230613-WA0002.jpg" alt="Foto Gaza" /></a>
+        <p>Network and Computer Engineer</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFILE -->
+  <section id="profile">
+    <div class="profile-container">
+      <h2>Profile</h2>
+      <div class="profile-grid">
+        <div class="profile-left">
+          <p>
+            Saya mahasiswa yang lagi nyari pengalaman sambil kuliah. Saya gampang nyesuain diri, suka belajar hal baru, dan senang kerja bareng orang lain. Sekarang lagi coba cari kesempatan buat nambah pengalaman dan ngembangin skill saya biar makin mantap ke depannya.
+          </p>
+          <br />
+
+          <h3>Work Experience</h3>
+          <ul>
+            <li><strong>QSA Computer</strong> — Staff / Technician (Nov 2023 – Feb 2024)</li>
+            <li><strong>Dislitbangau</strong> — Intern / IT Support (Jul – Okt 2022)</li>
+            <li><strong>Diskominfo</strong> — Freelance / Network Engineer (Jan – Jul 2022)</li>
+          </ul>
+          <br />
+
+          <h3>Education</h3>
+          <ul>
+            <li>STMIK LIKMI — Informatics and AI Technology (Ongoing)</li>
+            <li>SMK ICB Cinta Teknika — Computer and Network Engineering (2020–2023)</li>
+          </ul>
+          <br />
+
+          <h3>Certification</h3>
+          <ul>
+            <li>MikroTik Certified Network Associate-MTCNA</li>
+            <li>Cybersecurity Fundamental</li>
+          </ul>
+        </div>
+
+        <div class="profile-right">
+          <img src="Pas foto formal 2025.jpg" alt="Foto Formal Gaza" />
+          <div class="skills">
+            <h3>Skills</h3>
+            <ul>
+              <li>Network Engineering</li>
+              <li>Hardware and Software Maintenance</li>
+              <li>Troubleshooting</li>
+              <li>Teamwork</li>
+              <li>Time Management</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <h2>Portfolio</h2>
+    <div class="port-card">
+      <p>
+        Beberapa proyek dan sertifikasi saya, termasuk pengalaman instalasi jaringan, troubleshooting, dan pembuatan web sederhana.
+      </p>
+      <p><strong>Sertifikasi:</strong> MTCNA, Cybersecurity Fundamental</p>
+    </div>
+  </section>
+
+  <!-- ASK ME -->
+  <section id="askme">
+    <h2>Ask Me!</h2>
+    <p>
+      Jika ada pertanyaan atau ingin bekerja sama, silakan hubungi saya melalui:
+      <br />
+      <a href="mailto:gazazakian8@gmail.com">gazazakian8@gmail.com</a>
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="https://www.instagram.com/ghast_z/" target="_blank">
+      <img src="insWhite.png" alt="IG" /> @ghast_z
+    </a>
+    <a href="#">
+      <img src="whaWhite.png" alt="WA" /> (+62 Placeholder)
+    </a>
+    <a href="https://www.tiktok.com/@nowayout21" target="_blank">
+      <img src="tikWhite.png" alt="TikTok" /> @nowayout21
+    </a>
+    <a href="https://www.youtube.com/@litchflick" target="_blank">
+      <img src="—Pngtree—youtube white icon_3570413.png" alt="YouTube" /> Litch Flick
+    </a>
+  </footer>
+
+  <!-- Placeholder for future JavaScript -->
+<script>
+    // ruang untuk JS tambahan nanti
+  </script>
+</body>
+</html>
