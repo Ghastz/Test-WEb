@@ -976,7 +976,7 @@ body.light-mode .cycle-date {
       <span class="cycle-number">Cycle 10</span>
       <span class="cycle-name">Feature Update(Theme,BGM,Download button)</span>
       <span class="cycle-date">Selasa, 28 Oktober 2025</span>
-		<a href="Cycle 10.html" target="_blank"></a>
+		<a href="Cycle 10.html" target="_blank" class="cycle-link"></a>
     </div>
     <div class="cycle-item">
       <span class="cycle-number">Cycle 9</span>
@@ -1463,7 +1463,23 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 300);
     }
   });
-
+	
+ // Theme toggle event - biar gk ilang pas ganti tema
+  themeToggle.addEventListener('change', function() {
+    // Stats visibility tetap dipertahankan
+    // Progress bars tetap pada state semula
+    if (statsVisible) {
+      // Pastikan stats tetap visible setelah theme change
+      setTimeout(() => {
+        skillsStats.classList.add('show');
+        skillProgresses.forEach(progress => {
+          const width = progress.getAttribute('data-width');
+          progress.style.width = width + '%';
+        });
+      }, 100);
+    }
+  });
+	
   // Hide stats when clicking outside (optional)
   document.addEventListener('click', function(e) {
     if (statsVisible && 
