@@ -357,7 +357,7 @@ body.light-mode .cycle-date {
  	}
 
  	body.light-mode .btn {
-  	background: #666;
+  	background: #007acc;
   	color: white;
  	}
 
@@ -608,7 +608,7 @@ body.light-mode .cycle-date {
       text-align: center;
     }
 
- .hero-profile img {
+  	.hero-profile img {
   	width: 180px;
   	border-radius: 12px;
   	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
@@ -617,7 +617,152 @@ body.light-mode .cycle-date {
   	cursor: pointer;
   	border: 2px solid transparent;
  	}
+/* ====== SKILLS STATS IN HOME ====== */
+  	.skills-stats {
+  	margin-top: 20px;
+  	padding: 15px;
+  	background: rgba(255, 255, 255, 0.08);
+  	border-radius: 12px;
+  	backdrop-filter: blur(10px);
+  	border: 1px solid rgba(255, 255, 255, 0.1);
+  	display: none; /* Awalnya tersembunyi */
+ 	}
 
+ 	.skills-stats.show {
+  	display: block;
+  	animation: fadeInUp 0.5s ease;
+ 	}
+
+ 	.skills-stats h4 {
+  	margin-bottom: 15px;
+  	color: #fff;
+  	font-size: 1.1em;
+  	text-align: center;
+ 	}
+
+ 	.skill-item {
+  	margin-bottom: 12px;
+  	display: flex;
+  	align-items: center;
+  	gap: 10px;
+ 	}
+
+ 	.skill-name {
+  	color: #ddd;
+  	font-size: 0.85em;
+  	width: 90px;
+  	flex-shrink: 0;
+ 	}
+
+ 	.skill-bar {
+  	flex: 1;
+  	height: 6px;
+  	background: #333;
+  	border-radius: 3px;
+  	overflow: hidden;
+ 	}
+
+ 	.skill-progress {
+  	height: 100%;
+    background: -webkit-linear-gradient(left, #1db954, #1ed760);
+    background: -o-linear-gradient(left, #1db954, #1ed760);
+    background: linear-gradient(to right, #1db954, #1ed760);
+  	border-radius: 3px;
+  	width: 0%;
+  	transition: width 1s ease-in-out;	
+ 	}
+
+ 	.cta-btn {
+  	display: block;
+  	width: 100%;
+  	padding: 8px 12px;
+  	background: #1db954;
+  	color: white;
+  	text-align: center;
+  	border-radius: 6px;
+  	font-size: 0.85em;
+  	font-weight: 600;
+  	transition: all 0.3s ease;
+  	margin-top: 10px;
+  	text-decoration: none;
+ 	}
+
+ 	.cta-btn:hover {
+  	background: #1ed760;
+  	transform: translateY(-1px);
+ 	}
+
+/* Animations */
+ 	@keyframes fadeInUp {
+  	from {
+    opacity: 0;
+    transform: translateY(10px);
+  	}
+  	to {
+    opacity: 1;
+    transform: translateY(0);
+  	}
+ }
+
+/* ====== LIGHT MODE STYLES ====== */
+ 	body.light-mode .skills-stats {
+  	background: rgba(255, 255, 255, 0.9);
+  	border: 1px solid rgba(0, 122, 204, 0.2);
+  	box-shadow: 0 4px 12px rgba(0, 122, 204, 0.1);
+ 	}
+
+ 	body.light-mode .skills-stats h4 {
+  	color: #007acc; /* Warna biru seperti tombol Download CV */
+  	font-weight: 600;
+ 	}
+
+ 	body.light-mode .skill-name {
+  	color: #555;
+  	font-weight: 500;
+ 	}
+
+ 	body.light-mode .skill-bar {
+  	background: #e6f2ff; 
+ 	}
+
+	body.light-mode .skill-progress {
+    background: linear-gradient(90deg, #007acc, #0088e6); 
+  	box-shadow: 0 2px 8px rgba(0, 122, 204, 0.3);
+}
+
+ 	body.light-mode .cta-btn {
+    background: #007acc; /* Warna biru sama seperti tombol Download CV */
+   	box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
+ 	}
+
+ 	body.light-mode .cta-btn:hover {
+    background: #0088e6;
+  	box-shadow: 0 6px 20px rgba(0, 122, 204, 0.4);
+ 	}
+
+/* Responsive */
+ 	@media (max-width: 768px) {
+   	.skills-stats {
+    margin-top: 15px;
+    padding: 12px;
+   	}
+  
+   	.skill-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+   	}
+  
+   	.skill-name {
+    width: 100%;
+   	}
+  
+   	.skill-bar {
+    width: 100%;
+   	}
+}
+	  
+/* Efek Glow di Home */
 /* Dark Mode - Glow Putih */
  	.hero-profile img:hover {
   	transform: scale(1.03);
@@ -630,6 +775,7 @@ body.light-mode .cycle-date {
   	box-shadow: 0 0 20px rgba(0,0,0,0.85);
   	border-color: rgba(0,0,0,0.85);
  	}
+	  
     /* ====== PROFILE ====== */
     #profile {
       background: linear-gradient(160deg, #202020, #111);
@@ -822,9 +968,15 @@ body.light-mode .cycle-date {
   </div>
   <div class="sidebar-content">
     <div class="cycle-item active">
-      <span class="cycle-number">Cycle 10</span>
+      <span class="cycle-number">Cycle 11</span>
       <span class="cycle-name">Feature Update</span>
       <span class="cycle-date">Current</span>
+    </div>
+    <div class="cycle-item">
+      <span class="cycle-number">Cycle 10</span>
+      <span class="cycle-name">Feature Update(Theme,BGM,Download button)</span>
+      <span class="cycle-date">Selasa, 28 Oktober 2025</span>
+		<a href="Cycle 10.html" target="_blank"></a>
     </div>
     <div class="cycle-item">
       <span class="cycle-number">Cycle 9</span>
@@ -891,26 +1043,59 @@ body.light-mode .cycle-date {
    	<source src="lofi.mp3" type="audio/mp3">.
  	</audio>
 
-  <!-- HOME -->
-  <section id="home">
-    <div class="hero-container">
-      <div class="hero-text">
-        <h1>Welcome to Gaza's Portfolio</h1>
-        <p>
-          Halo, saya <strong>Gaza Zakian</strong>, mahasiswa STMIK LIKMI yang tertarik pada dunia
-          teknologi — khususnya dibidang <strong>Artificial Intelligence</strong>.
-        </p>
-        <p>
-          Yuk, jelajahi <strong>Profile</strong> saya dengan mengklik gambar disamping dan klik tombol <strong>Portofolio</strong> dibawah ini untuk melihat perjalanan dan keterampilan yang saya kembangkan sejauh ini. Jika penasaran dengan proses development web ini, kamu bisa klik logo yang berputar diatas.
-        </p>
-        <a href="#portfolio" class="btn">Lihat Portfolio</a>
-      </div>
+<!-- HOME -->
+<section id="home">
+  <div class="hero-container">
+    <div class="hero-text">
+      <h1>Welcome to Gaza's Portfolio</h1>
+      <p>
+        Halo, saya <strong>Gaza Zakian</strong>, mahasiswa STMIK LIKMI yang tertarik pada dunia
+        teknologi — khususnya dibidang <strong>Artificial Intelligence</strong>.
+      </p>
+      <p>
+        Yuk, jelajahi <strong>Profile</strong> saya dengan mengklik gambar disamping dan klik tombol <strong>Portofolio</strong> dibawah ini untuk melihat perjalanan dan keterampilan yang saya kembangkan sejauh ini. Jika penasaran dengan proses development web ini, kamu bisa klik logo yang berputar diatas.
+      </p>
+      <a href="#portfolio" class="btn">Lihat Portfolio</a>
+    </div>
 
-      <div class="hero-profile"> <a href="#profile"><img src="904715035-IMG-20230613-WA0002.jpg" alt="Foto Gaza" /></a>
+    <div class="hero-profile">
+      <div class="profile-image-container">
+        <img src="904715035-IMG-20230613-WA0002.jpg" alt="Foto Gaza" id="profile-img" />
         <p>Network and Computer Engineer</p>
       </div>
+      
+      <!-- Skills Stats Container - SAMPING KANAN -->
+      <div class="skills-stats" id="skills-stats">
+        <h4>Skills Level</h4>
+        <div class="skill-item">
+          <span class="skill-name">Networking</span>
+          <div class="skill-bar">
+            <div class="skill-progress" data-width="85"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Hardware</span>
+          <div class="skill-bar">
+            <div class="skill-progress" data-width="80"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Software</span>
+          <div class="skill-bar">
+            <div class="skill-progress" data-width="75"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Troubleshooting</span>
+          <div class="skill-bar">
+            <div class="skill-progress" data-width="90"></div>
+          </div>
+        </div>
+        <a href="#profile" class="cta-btn">See Full Profile →</a>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- PROFILE -->
   <section id="profile">
@@ -1140,7 +1325,7 @@ themeToggle.addEventListener('change', function() {
   }
 });
 	
-// Simplified Sidebar dengan External Links
+// Sidebar buat development progress
 document.addEventListener('DOMContentLoaded', function() {
   const logo = document.querySelector('nav img');
   const devSidebar = document.getElementById('dev-sidebar');
@@ -1237,6 +1422,61 @@ document.addEventListener('DOMContentLoaded', function() {
         nextItem.classList.add('active');
         nextItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
+    }
+  });
+});
+	
+// Skill Stat buat di bagian Home
+document.addEventListener('DOMContentLoaded', function() {
+  const profileImg = document.getElementById('profile-img');
+  const skillsStats = document.getElementById('skills-stats');
+  const skillProgresses = document.querySelectorAll('.skill-progress');
+  
+  let statsVisible = false;
+
+  // Toggle skills stats when clicking profile image
+  profileImg.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    if (!statsVisible) {
+      // Show stats
+      skillsStats.classList.add('show');
+      statsVisible = true;
+      
+      // Animate progress bars
+      setTimeout(() => {
+        skillProgresses.forEach(progress => {
+          const width = progress.getAttribute('data-width');
+          progress.style.width = width + '%';
+        });
+      }, 300);
+    } else {
+      // Hide stats
+      skillsStats.classList.remove('show');
+      statsVisible = false;
+      
+      // Reset progress bars
+      setTimeout(() => {
+        skillProgresses.forEach(progress => {
+          progress.style.width = '0%';
+        });
+      }, 300);
+    }
+  });
+
+  // Hide stats when clicking outside (optional)
+  document.addEventListener('click', function(e) {
+    if (statsVisible && 
+        !skillsStats.contains(e.target) && 
+        e.target !== profileImg) {
+      skillsStats.classList.remove('show');
+      statsVisible = false;
+      
+      setTimeout(() => {
+        skillProgresses.forEach(progress => {
+          progress.style.width = '0%';
+        });
+      }, 300);
     }
   });
 });
