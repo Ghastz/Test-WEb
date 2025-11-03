@@ -876,7 +876,118 @@ body.light-mode .cycle-date {
       margin: 20px 0;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
     }
+/* ====== PORTFOLIO GALLERY ====== */
+.portfolio-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
+.intro-card {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.intro-card h3 {
+  color: #1db954;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+}
+
+.portfolio-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin: 40px 0;
+}
+
+.gallery-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gallery-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  border-color: #1db954;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-caption {
+  padding: 20px;
+}
+
+.gallery-caption h4 {
+  color: #1db954;
+  margin-bottom: 8px;
+  font-size: 1.1em;
+}
+
+.gallery-caption p {
+  color: #ccc;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+/* Video Section */
+.video-showcase {
+  margin-top: 50px;
+}
+
+.video-container {
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Light Mode Support */
+body.light-mode .gallery-item {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .gallery-caption h4 {
+  color: #007acc;
+}
+
+body.light-mode .gallery-caption p {
+  color: #666;
+}
+
+body.light-mode .gallery-item:hover {
+  border-color: #007acc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .portfolio-gallery {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .gallery-item img {
+    height: 180px;
+  }
+  
+  .video-container iframe {
+    height: 250px;
+  }
+  
+  .intro-card h3 {
+    font-size: 1.5em;
+  }
+}
     /* ====== ASK ME ====== */
     #askme {
       background: linear-gradient(160deg, #222, #111);
@@ -1151,15 +1262,84 @@ body.light-mode .cycle-date {
   </section>
 
   <!-- PORTFOLIO -->
-  <section id="portfolio">
-    <h2>Portfolio</h2>
-    <div class="port-card">
-      <p>
-        Beberapa proyek dan sertifikasi saya, termasuk pengalaman instalasi jaringan, troubleshooting, dan pembuatan web sederhana.
-      </p>
-      <p><strong>Sertifikasi:</strong> MTCNA, Cybersecurity Fundamental</p>
+    <section id="portfolio">
+      <h2>Portfolio</h2>
+      <div class="port-card">
+        <p align="left"> Selain mempelajari teknologi, saya juga punya ketertarikan sebagai content creator YouTube, di mana saya berubah dari yang biasanya troubleshoot jaringan jadi troubleshoot timeline editing!
+		Di sini saya tunjukkan proses behind-the-scenes yang jarang orang lihat: dari ngerekam klip aneh-aneh, sampai begadang editing sambil temenan sama render progress bar. </p>
+     <!-- Gallery Grid -->
+    <div class="portfolio-gallery">
+      <div class="gallery-item">
+        <img src="assets/process1.jpg" alt="Ideation & Planning - Gaza brainstorming content ideas" />
+        <div class="gallery-caption">
+          <h4>Stage 1: Planning Content</h4>
+          <p>Nyari ide untuk konten yang mau dibuat</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="Port1.png" alt="Script Writing - Gaza menulis script dengan serius" />
+        <div class="gallery-caption">
+          <h4>Stage 2: Setting OBS</h4>
+          <p>Nyetting OBS biar smooth pada saat perekaman konten</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="assets/process3.jpg" alt="Setup Recording - Gaza menyiapkan peralatan recording" />
+        <div class="gallery-caption">
+          <h4>Stage 3: Recording</h4>
+          <p>Record gameplay</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="assets/process4.jpg" alt="Recording Session - Gaza sedang recording dengan ekspresi lucu" />
+        <div class="gallery-caption">
+          <h4>Stage 4: Editing Video</h4>
+          <p>Mengedit video buat enak ditonton</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="assets/process5.jpg" alt="Editing Process - Gaza editing video dengan serius" />
+        <div class="gallery-caption">
+          <h4>Stage 5: Editing Thumbnail</h4>
+          <p>Mengedit thumbnail supaya viewers tertarik untuk menonton.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="assets/process6.jpg" alt="Thumbnail Design - Gaza mendesain thumbnail yang menarik" />
+        <div class="gallery-caption">
+          <h4>Stage 6: Upload ke Youtube</h4>
+          <p>Langsung upload ke Youtube</p>
+        </div>
+      </div>
     </div>
-  </section>
+
+    <!-- YouTube Video -->
+    <div class="video-showcase">
+      <div class="port-card">
+        <h3>🎉 Final Result: My YouTube Masterpiece!</h3>
+        <p>Setelah semua proses di atas, ini dia hasil akhirnya, Semoga menghibur dan jangan lupa subscribe! 😉</p>
+        
+        <div class="video-container">
+          <!-- Ganti YOUR_VIDEO_ID dengan ID YouTube-mu -->
+          <iframe 
+            width="100%" 
+            height="400" 
+            src="https://www.youtube.com/embed/3369fYUqt-s?si=X9dzOrsdqsNowt1A" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+    </section>
 
   <!-- ASK ME -->
   <section id="askme">
