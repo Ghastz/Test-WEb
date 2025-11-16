@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gaza Zakian - Portfolio</title>
+    <link rel="icon" href="animatedlogo.gif" />
+    <style>
+      /* ====== GLOBAL ====== */
+      * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      }
+      body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #111, #2b2b2b);
+      color: #eee;
+      overflow-x: hidden;
+      }
+      a {
+      color: inherit;
+      text-decoration: none;
+      }
+      h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      }
+      /* Prevent any horizontal overflow */
+      html, body {
+      overflow-x: hidden;
+      width: 100%;
+      }
+      /* ====== NAVBAR ====== */
+      nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(20, 20, 20, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 15px 0;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      }
+      nav img {
+      position: absolute;
+      left: 40px;
+      height: 45px;
+      width: auto;
+      cursor: pointer; /* Tambahkan ini */
+      transition: transform 0.3s ease;
+      }
+      nav a {
+      color: #ddd;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      }
+      nav a:hover {
+      color: #fff;
+      }
+      /* Development Timeline Sidebar */
+      .dev-sidebar {
+      position: fixed;
+      left: -400px;
+      top: 0;
+      width: 350px;
+      height: 100vh;
+      background: rgba(20, 20, 20, 0.95);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid #333;
+      z-index: 2000;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+      }
+      .dev-sidebar.active {
+      left: 0;
+      }
+      .sidebar-header {
+      padding: 20px;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      }
+      .sidebar-header h3 {
+      color: #fff;
+      font-size: 1.2em;
+      }
+      .close-sidebar {
+      background: none;
+      border: none;
+      color: #ddd;
+      font-size: 1.5em;
+      cursor: pointer;
+      padding: 5px;
+      transition: color 0.3s ease;
+      }
+      .close-sidebar:hover {
+      color: #fff;
+      }
+      .sidebar-content {
+      padding: 20px;
+      }
+      .cycle-item {
+      padding: 15px;
+      margin-bottom: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      border-left: 4px solid #333;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      }
+      .cycle-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-left-color: #1db954;
+      }
+      /* Style untuk cycle link */
+      .cycle-item {
+      position: relative; /* Untuk absolute positioning link */
+      padding: 15px;
+      margin-bottom: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      border-left: 4px solid #333;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      }
+      .cycle-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+      z-index: 1;
+      }
+      /* External link indicator */
+      .cycle-item::after {
+      content: '↗';
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      font-size: 0.9em;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      }
+      .cycle-item:hover::after {
+      opacity: 1;
+      }
+      .cycle-item.active::after {
+      content: '📍';
+      opacity: 1;
+      color: #1db954;
+      }
+      .cycle-name {
+      display: block;
+      color: #fff;
+      font-weight: 500;
+      margin: 5px 0;
+      }
+      .cycle-date {
+      display: block;
+      color: #888;
+      font-size: 0.8em;
+      }
+      /* Sidebar Overlay */
+      .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      }
+      .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      }
+      nav img:hover {
+      transform: scale(1.05);
+      }
+      /* Light Mode Support */
+      body.light-mode .dev-sidebar {
+      background: rgba(255, 255, 255, 0.95);
+      border-right: 1px solid #e0e0e0;
+      }
+      body.light-mode .sidebar-header {
+      border-bottom: 1px solid #e0e0e0;
+      }
+      body.light-mode .sidebar-header h3 {
+      color: #333;
+      }
+      body.light-mode .close-sidebar {
+      color: #666;
+      }
+      body.light-mode .close-sidebar:hover {
+      color: #000;
+      }
+      body.light-mode .cycle-item {
+      background: rgba(0, 0, 0, 0.05);
+      border-left: 4px solid #ddd;
+      }
+      body.light-mode .cycle-item:hover {
+      background: rgba(0, 0, 0, 0.1);
+      border-left-color: #1db954;
+      }
+      body.light-mode .cycle-name {
+      color: #333;
+      }
+      body.light-mode .cycle-date {
+      color: #666;
+      }	  
+      /* ====== DARK/LIGHT MODE TOGGLE ====== */
+      .theme-mode-toggle {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 8px 12px;
+      background: transparent;
+      border: none;
+      color: #ddd;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      font-family: "Poppins", sans-serif;
+      margin-right: 10px;
+      gap: 50px;
+      position: absolute;
+      right: 130px;
+      transform: translateY(-50%);	
+      }
+      .theme-mode-toggle:hover {
+      color: #fff;
+      }
+      .theme-icon {
+      font-size: 1.2em;
+      transition: transform 0.3s ease;
+      }
+      .theme-mode-toggle:hover .theme-icon {
+      transform: scale(1.1);
+      }
+      /* Light Mode Styles */
+      body.light-mode {
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      color: #333;
+      }
+      body.light-mode nav {
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid #e0e0e0;
+      }
+      body.light-mode nav a {
+      color: #666;
+      }
+      body.light-mode nav a:hover {
+      color: #000;
+      }
+      body.light-mode .theme-mode-toggle {
+      color: #666;
+      }
+      body.light-mode .theme-mode-toggle:hover {
+      color: #000;
+      }
+      body.light-mode .music-toggle {
+      color: #666;
+      }
+      body.light-mode .music-toggle:hover {
+      color: #000;
+      }
+      body.light-mode #music-toggle:checked + .music-icon,
+      body.light-mode #music-toggle:checked + .music-icon + .music-text {
+      color: #1db954;
+      }
+      body.light-mode #home {
+      background: linear-gradient(160deg, #e0e0e0, #c3cfe2);
+      }
+      body.light-mode #profile {
+      background: linear-gradient(160deg, #d5d5d5, #c3cfe2);
+      }
+      body.light-mode #portfolio {
+      background: linear-gradient(160deg, #d0d0d0, #c3cfe2);
+      }
+      body.light-mode #askme {
+      background: linear-gradient(160deg, #dbdbdb, #c3cfe2);
+      }
+      body.light-mode .hero-container,
+      body.light-mode .profile-container,
+      body.light-mode .port-card {
+      background: rgba(255, 255, 255, 0.8);
+      color: #333;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+      body.light-mode .hero-text p,
+      body.light-mode .profile-left p {
+      color: #666;
+      }
+      body.light-mode .btn {
+      background: #007acc;
+      color: white;
+      }
+      body.light-mode .btn:hover {
+      background: #007acc;
+      }
+      body.light-mode .skills li {
+      background: #e9ecef;
+      color: #333;
+      }
+      body.light-mode footer {
+      background: rgba(255, 255, 255, 0.95);
+      color: #333;
+      border-top: 1px solid #e0e0e0;
+      }
+      body.light-mode footer a {
+      color: #333;
+      }
+      body.light-mode #askme a {
+      color: #007acc;
+      }	  
+      /* ====== MUSIC TOGGLE STYLE ====== */
+      .music-toggle-container {
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      }
+      .music-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 8px 16px;
+      background: transparent;
+      border: none;
+      color: #ddd;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      font-family: "Poppins", sans-serif;
+      }
+      .music-toggle:hover {
+      color: #fff;
+      }
+      /* Style ketika musik aktif - cuma ganti warna text saja */
+      #music-toggle:checked + .music-icon,
+      #music-toggle:checked + .music-icon + .music-text {
+      color: #1db954;
+      }
+      #music-toggle:checked + .music-icon + .music-text:hover,
+      #music-toggle:checked + .music-icon:hover {
+      color: #1ed760;
+      }
+      .music-icon {
+      font-size: 1.1em;
+      }
+      .music-text {
+      font-size: 0.9em;
+      font-weight: 500;
+      }
+      /* Volume Control Styles */
+      .volume-control {
+      position: absolute;
+      right: 120px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(20, 20, 20, 0.95);
+      padding: 10px 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid #333;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      }
+      .volume-control.show {
+      opacity: 1;
+      visibility: visible;
+      }
+      .volume-slider {
+      width: 80px;
+      height: 4px;
+      background: #444;
+      border-radius: 2px;
+      outline: none;
+      -webkit-appearance: none;
+      }
+      .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      background: #1db954;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      }
+      .volume-slider::-webkit-slider-thumb:hover {
+      background: #1ed760;
+      transform: scale(1.1);
+      }
+      .volume-slider::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      background: #1db954;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+      }
+      /* Buat class khusus untuk elements yang perlu transition theme */
+      .theme-transition {
+      transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+      }
+      /* Terapkan ke elements yang perlu */
+      body {
+      composes: theme-transition; /* atau langsung */
+      transition: background-color 0.5s ease, color 0.5s ease;
+      }
+      nav, .hero-container, .profile-container, .port-card, .skills li, footer {
+      transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+      }
+      /* Pastikan section transition tetap seperti semula */
+      section {
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s ease; /* Existing transition */
+      /* JANGAN ganggu ini */
+      }
+      section:target {
+      opacity: 1;
+      transform: translateX(0);
+      }
+      /* ====== SECTION BASE ====== */
+      section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 120px 10% 80px;
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 100%;
+      box-sizing: border-box;
+      }
+      section:target {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      position: relative;
+      }
+      body:not(:has(:target)) #portfolio {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      position: relative;
+      }
+      /* ====== HOME ====== */
+      #home {
+      background: linear-gradient(160deg, #1a1a1a, #111);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 0;
+      margin-bottom: 0;
+      overflow: hidden;
+      }
+      .hero-container {
+      margin-top: -130px;	
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+      max-width: 1100px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      }
+      .hero-text {
+      flex: 1.3;
+      text-align: left;
+      }
+      .hero-text h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      }
+      .hero-text p {
+      color: #ccc;
+      margin-bottom: 25px;
+      line-height: 1.6;
+      }
+      .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #1db954;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      }
+      .btn:hover {
+      background: #1ed760;
+      transform: translateY(-1px);
+      }
+      .hero-profile {
+      flex: 1;
+      text-align: center;
+      }
+      .hero-profile img {
+      width: 180px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+      }
+      /* ====== SKILLS STATS IN HOME ====== */
+      .skills-stats {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: none; /* Awalnya tersembunyi */
+      }
+      .skills-stats.show {
+      display: block;
+      animation: fadeInUp 0.5s ease;
+      }
+      .skills-stats h4 {
+      margin-bottom: 15px;
+      color: #fff;
+      font-size: 1.1em;
+      text-align: center;
+      }
+      .skill-item {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      }
+      .skill-name {
+      color: #ddd;
+      font-size: 0.85em;
+      width: 90px;
+      flex-shrink: 0;
+      }
+      .skill-bar {
+      flex: 1;
+      height: 6px;
+      background: #333;
+      border-radius: 3px;
+      overflow: hidden;
+      }
+      .skill-progress {
+      height: 100%;
+      background: -webkit-linear-gradient(left, #1db954, #1ed760);
+      background: -o-linear-gradient(left, #1db954, #1ed760);
+      background: linear-gradient(to right, #1db954, #1ed760);
+      border-radius: 3px;
+      width: 0%;
+      transition: width 1s ease-in-out;	
+      }
+      .cta-btn {
+      display: block;
+      width: 100%;
+      padding: 8px 12px;
+      background: #1db954;
+      color: white;
+      text-align: center;
+      border-radius: 6px;
+      font-size: 0.85em;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      text-decoration: none;
+      }
+      .cta-btn:hover {
+      background: #1ed760;
+      transform: translateY(-1px);
+      }
+      /* Animations */
+      @keyframes fadeInUp {
+      from {
+      opacity: 0;
+      transform: translateY(10px);
+      }
+      to {
+      opacity: 1;
+      transform: translateY(0);
+      }
+      }
+      /* ====== LIGHT MODE STYLES ====== */
+      body.light-mode .skills-stats {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 122, 204, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 122, 204, 0.1);
+      }
+      body.light-mode .skills-stats h4 {
+      color: #007acc; /* Warna biru seperti tombol Download CV */
+      font-weight: 600;
+      }
+      body.light-mode .skill-name {
+      color: #555;
+      font-weight: 500;
+      }
+      body.light-mode .skill-bar {
+      background: #e6f2ff; 
+      }
+      body.light-mode .skill-progress {
+      background: linear-gradient(90deg, #007acc, #0088e6); 
+      box-shadow: 0 2px 8px rgba(0, 122, 204, 0.3);
+      }
+      body.light-mode .cta-btn {
+      background: #007acc; /* Warna biru sama seperti tombol Download CV */
+      box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
+      }
+      body.light-mode .cta-btn:hover {
+      background: #0088e6;
+      box-shadow: 0 6px 20px rgba(0, 122, 204, 0.4);
+      }
+      /* Responsive */
+      @media (max-width: 768px) {
+      .skills-stats {
+      margin-top: 15px;
+      padding: 12px;
+      }
+      .skill-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+      }
+      .skill-name {
+      width: 100%;
+      }
+      .skill-bar {
+      width: 100%;
+      }
+      }
+      /* Efek Glow di Home */
+      /* Dark Mode - Glow Putih */
+      .hero-profile img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(255,255,255,0.85);
+      border-color: rgba(255,255,255,0.85);
+      }
+      /* Light Mode - Glow Biru/Abu */
+      body.light-mode .hero-profile img:hover {
+      box-shadow: 0 0 20px rgba(0,0,0,0.85);
+      border-color: rgba(0,0,0,0.85);
+      }
+      /* ====== PROFILE ====== */
+      #profile {
+      background: linear-gradient(160deg, #202020, #111);
+      text-align: left;
+      }
+      .profile-container {
+      margin-top: -68px;	
+      max-width: 1000px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 50px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      }
+      .profile-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      }
+      .profile-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      }
+      .profile-left {
+      flex: 2;
+      min-width: 300px;
+      }
+      .profile-right {
+      flex: 1;
+      min-width: 250px;
+      text-align: center;
+      }
+      .profile-right img {
+      width: 150px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      }
+      .skills ul {
+      list-style: none;
+      padding: 0;
+      }
+      .skills li {
+      background: #2b2b2b;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      color: #ddd;
+      }
+      /* ====== BUTTON DOWNLOAD CV ====== */
+      .download-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #1db954;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 15px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
+      }
+      .download-btn:hover {
+      background: #1ed760;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
+      }
+      /* Untuk Light Mode */
+      body.light-mode .download-btn {
+      background: #007acc;
+      box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
+      }
+      body.light-mode .download-btn:hover {
+      background: #0088e6;
+      box-shadow: 0 6px 20px rgba(0, 122, 204, 0.4);
+      }
+      /* ====== PORTFOLIO ====== */
+      #portfolio {
+      background: linear-gradient(160deg, #1b1b1b, #0f0f0f);
+      }
+      .port-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 30px;
+      margin: 20px 0;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+      }
+      /* ====== PORTFOLIO GALLERY ====== */
+      .portfolio-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      }
+      .intro-card {
+      text-align: center;
+      margin-bottom: 40px;
+      }
+      .intro-card h3 {
+      color: #1db954;
+      margin-bottom: 15px;
+      font-size: 1.8em;
+      }
+      .portfolio-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+      }
+      .gallery-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .gallery-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      border-color: #1db954;
+      }
+      .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      }
+      .gallery-caption {
+      padding: 20px;
+      }
+      .gallery-caption h4 {
+      color: #1db954;
+      margin-bottom: 8px;
+      font-size: 1.1em;
+      }
+      .gallery-caption p {
+      color: #ccc;
+      font-size: 0.9em;
+      line-height: 1.4;
+      }
+      /* Video Section */
+      .video-showcase {
+      margin-top: 50px;
+      }
+      .video-container {
+      margin-top: 20px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+      /* Light Mode Support */
+      body.light-mode .gallery-item {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      body.light-mode .gallery-caption h4 {
+      color: #007acc;
+      }
+      body.light-mode .gallery-caption p {
+      color: #666;
+      }
+      body.light-mode .gallery-item:hover {
+      border-color: #007acc;
+      }
+      /* Responsive */
+      @media (max-width: 768px) {
+      .portfolio-gallery {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      }
+      .gallery-item img {
+      height: 180px;
+      }
+      .video-container iframe {
+      height: 250px;
+      }
+      .intro-card h3 {
+      font-size: 1.5em;
+      }
+      }
+      /* ====== ASK ME ====== */
+      #askme {
+      background: linear-gradient(160deg, #222, #111);
+      }
+      #askme a {
+      color: #61dafb;
+      font-weight: 600;
+      }
+      /* ====== ASK ME LAYOUT ====== */
+      .askme-container {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr; /* Maps 1 bagian, Form 1.5 bagian */
+      gap: 40px;
+      align-items: start;
+      max-width: 1200px; /* Kembali ke width normal */
+      margin: 30px auto;
+      padding: 0 20px;
+      }
+      .map-section {
+      /* Tidak perlu flex property */
+      }
+      .form-section {
+      /* Tidak perlu flex property */
+      }
+      .map-container {
+      margin-bottom: 20px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+      .contact-form {
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      }
+      .contact-form h3 {
+      font-size: 1.4em;
+      margin-bottom: 25px;
+      text-align: center;
+      }
+      .contact-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      }
+      .contact-form input,
+      .contact-form textarea {
+      padding: 15px;
+      border: 1px solid #444;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      width: 100%;
+      }
+      .contact-form textarea {
+      min-height: 120px;
+      resize: vertical;
+      }
+      /* BUTTON THEME COLORS */
+      .contact-form button {
+      padding: 15px;
+      background: #1db954; /* Dark mode: HIJAU */
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      width: 100%;
+      }
+      .contact-form button:hover {
+      background: #1ed760; /* Dark mode: HIJAU terang */
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
+      }
+      /* Light Mode - Button jadi BIRU */
+      body.light-mode .contact-form button {
+      background: #007acc; /* Light mode: BIRU */
+      box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
+      }
+      body.light-mode .contact-form button:hover {
+      background: #0088e6; /* Light mode: BIRU terang */
+      box-shadow: 0 6px 20px rgba(0, 122, 204, 0.4);
+      }
+      .alt-contacts {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      font-size: 16px;
+      }
+      .alt-contacts a {
+      color: #61dafb;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      }
+      /* Light Mode Support */
+      body.light-mode .contact-form,
+      body.light-mode .alt-contacts {
+      background: rgba(255, 255, 255, 0.9);
+      }
+      body.light-mode .contact-form input,
+      body.light-mode .contact-form textarea {
+      background: white;
+      color: #333;
+      border-color: #ccc;
+      }
+      /* Responsive Design */
+      @media (max-width: 768px) {
+      .askme-container {
+      grid-template-columns: 1fr; /* Stack vertikal di mobile */
+      gap: 30px;
+      }
+      .contact-form {
+      padding: 30px;
+      min-height: auto;
+      }
+      }
+      /* ====== LOADING SCREEN ====== */
+      .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #111, #2b2b2b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s ease;
+      }
+      .loading-screen.active {
+      opacity: 1;
+      visibility: visible;
+      }
+      .loading-content {
+      text-align: center;
+      color: white;
+      }
+      .loading-logo img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+      }
+      .loading-text h3 {
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      color: #1db954; /* Dark mode color */
+      }
+      .loading-bar {
+      width: 300px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      margin: 20px auto;
+      overflow: hidden;
+      }
+      .loading-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #1db954, #1ed760); /* Dark mode gradient */
+      border-radius: 2px;
+      width: 0%;
+      animation: loading 1.5s ease-in-out infinite;
+      }
+      .loading-text p {
+      color: #ccc;
+      font-size: 0.9em;
+      margin-top: 15px;
+      }
+      /* ====== LIGHT MODE STYLES ====== */
+      body.light-mode .loading-screen {
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      }
+      body.light-mode .loading-content {
+      color: #333;
+      }
+      body.light-mode .loading-text h3 {
+      color: #007acc; /* Light mode color */
+      }
+      body.light-mode .loading-bar {
+      background: rgba(0, 0, 0, 0.1);
+      }
+      body.light-mode .loading-progress {
+      background: linear-gradient(90deg, #007acc, #0088e6); /* Light mode gradient */
+      }
+      body.light-mode .loading-text p {
+      color: #666;
+      }
+      /* ====== ANIMATIONS ====== */
+      @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+      }
+      @keyframes loading {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(0%); }
+      100% { transform: translateX(100%); }
+      }
+      /* Smooth transitions for theme switching */
+      .loading-screen,
+      .loading-text h3,
+      .loading-bar,
+      .loading-progress,
+      .loading-text p {
+      transition: all 0.5s ease;
+      }		
+      /* ====== FOOTER ====== */
+      footer {
+      background: rgba(20, 20, 20, 0.95);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      padding: 15px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 0.9em;
+      backdrop-filter: blur(6px);
+      }
+      footer a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: white;
+      }
+      footer img {
+      width: 22px;
+      height: 22px;
+      filter: brightness(100%);
+      }
+      /* Light Mode - Invert setiap logo biar kelihatan */
+      body.light-mode nav img,
+      body.light-mode footer img {
+      filter: brightness(0%); /* Jadi hitam di light mode */	  
+      /* ====== RESPONSIVE ====== */
+      @media (max-width: 768px) {
+      nav img { left: 20px; }
+      .hero-container { flex-direction: column; text-align: center; }
+      .hero-text { text-align: center; }
+      .profile-grid { flex-direction: column; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <img src="animatedlogo.gif" alt="Logo Gaza" />
+      <a href="Index.html#home">Home</a>
+      <a href="Index.html#profile">Profile</a>
+      <a href="#portfolio">Portofolio</a>
+      <a href="Index.html#askme">Ask Me</a>
+      <div class="theme-toggle-container">
+        <!-- Dark/Light Mode Toggle -->
+        <label class="theme-mode-toggle">
+        <input type="checkbox" id="theme-mode-toggle" hidden="">
+        <span class="theme-icon">🌙</span>
+        </label>	  
+        <!-- BGM Mode Switch -->
+        <div class="music-toggle-container">
+          <label class="switch music-toggle">
+          <input type="checkbox" id="music-toggle" hidden="">
+          <span class="music-icon">🎵</span>
+          <span class="music-text">BGM</span>
+          </label>
+          <!-- Volume Control sebagai child -->
+          <div class="volume-control" id="volume-control">
+            <input type="range" id="volume-slider" min="0" max="100" value="50" class="volume-slider">
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Development Timeline Sidebar -->
+    <div class="dev-sidebar" id="dev-sidebar">
+      <div class="sidebar-header">
+        <h3>Development Timeline</h3>
+        <button class="close-sidebar" id="close-sidebar">×</button>
+      </div>
+      <div class="sidebar-content">
+        <div class="cycle-item active">
+          <span class="cycle-number">Cycle 12</span>
+          <span class="cycle-name">Misahin Portofolio dan nambah Section(AskMe)</span>
+          <span class="cycle-date">Current</span>
+        </div>
+      <div class="cycle-item">
+          <span class="cycle-number">Cycle 11</span>
+          <span class="cycle-name">Section Update(Portofolio)</span>
+          <span class="cycle-date">Selasa, 2 November 2025</span>
+          <a href="Cycle 11.html" target="_blank" class="cycle-link"></a>
+        </div>   		  
+        <div class="cycle-item">
+          <span class="cycle-number">Cycle 10</span>
+          <span class="cycle-name">Feature Update(Theme,BGM,Download button)</span>
+          <span class="cycle-date">Selasa, 28 Oktober 2025</span>
+          <a href="Cycle 10.html" target="_blank" class="cycle-link"></a>
+        </div>
+        <div class="cycle-item">
+          <span class="cycle-number">Cycle 9</span>
+          <span class="cycle-name">Design Overhaul</span>
+          <span class="cycle-date">Minggu, 26 Oktober 2025</span>
+          <a href="Cycle 9.html" target="_blank" class="cycle-link"></a>
+        </div>
+        <div class="cycle-item">
+          <span class="cycle-number">Cycle 8</span>
+          <span class="cycle-name">Home UI Optimization</span>
+          <span class="cycle-date">Selasa, 14 Oktober 2025</span>
+          <a href="Cycle 8.html" target="_blank" class="cycle-link"></a>
+        </div>
+        <div class="cycle-item">
+          <span class="cycle-number">Cycle 7</span>
+          <span class="cycle-name">Improving Home UI</span>
+          <span class="cycle-date">Selasa, 14 Oktober 2025</span>
+          <a href="Cycle 7.html" target="_blank" class="cycle-link"></a>
+        </div>
+        <div class="cycle-item">
+          <span class="cycle-number">Cycle 6</span>
+          <span class="cycle-name">Home UI Overhaul</span>
+          <span class="cycle-date">Selasa, 14 Oktober 2025</span>
+          <a href="Cycle 6.html" target="_blank" class="cycle-link"></a>
+        </div>
+        <div class="cycle-item">
+          <span class="cycle-number">Cycle 5</span>
+          <span class="cycle-name">Penambahan Logo, Bugfixing</span>
+          <span class="cycle-date">Minggu, 12 Oktober 2025</span>
+          <a href="Cycle 5.html" target="_blank" class="cycle-link"></a>
+        </div>
+        <div class="cycle-item">
+          <span class="cycle-number">Cycle 4</span>
+          <span class="cycle-name">Design Awal</span>
+          <span class="cycle-date">Minggu, 12 Oktober 2025</span>
+          <a href="Cycle 4.html" target="_blank" class="cycle-link"></a>
+        </div>
+        <div class="cycle-item">
+          <span class="cycle-number">Cycle 3</span>
+          <span class="cycle-name">Basic Structure</span>
+          <span class="cycle-date">Minggu, 12 Oktober 2025</span>
+          <a href="Cycle 3.html" target="_blank" class="cycle-link"></a>
+        </div>
+        <div class="cycle-item">
+          <span class="cycle-number">Cycle 2</span>
+          <span class="cycle-name">Initial Setup</span>
+          <span class="cycle-date">Sabtu, 11 Oktober 2025</span>
+          <a href="Cycle 2.html" target="_blank" class="cycle-link"></a>
+        </div>
+        <div class="cycle-item">
+          <span class="cycle-number">Cycle 1</span>
+          <span class="cycle-name">Project Start - Template awal</span>
+          <span class="cycle-date">Sabtu, 11 Oktober 2025</span>
+          <a href="Cycle 1.html" target="_blank" class="cycle-link"></a>
+        </div>
+      </div>
+    </div>
+    <!-- Overlay untuk menutup sidebar -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <!-- 🎧 Hidden Audio Player -->
+    <audio id="bg-music" loop>
+      <source src="lofi.mp3" type="audio/mp3">
+      .
+    </audio>
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+      <h2>Portfolio</h2>
+      <div class="port-card">
+        <p align="left"> Selain mempelajari teknologi, saya juga punya ketertarikan sebagai content creator YouTube, di mana saya berubah dari yang biasanya troubleshoot jaringan jadi troubleshoot timeline editing!
+          Di sini saya tunjukkan proses behind-the-scenes yang jarang orang liat, dari ngerekam klip aneh-aneh, sampe begadang editing. 
+        </p>
+        <!-- Gallery Grid -->
+        <div class="portfolio-gallery">
+          <div class="gallery-item">
+            <img src="Port2.png" alt="Ideation & Planning - Gaza brainstorming content ideas" />
+            <div class="gallery-caption">
+              <h4>Stage 1: Planning Content</h4>
+              <p>Nyari ide untuk konten yang mau dibuat</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="Port1.png" alt="Script Writing - Gaza menulis script dengan serius" />
+            <div class="gallery-caption">
+              <h4>Stage 2: Setting OBS</h4>
+              <p>Nyetting OBS biar smooth pas ngerecord konten</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="Port3.png" alt="Setup Recording - Gaza menyiapkan peralatan recording" />
+            <div class="gallery-caption">
+              <h4>Stage 3: Recording</h4>
+              <p>Record gameplay</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="Port4.png" alt="Recording Session - Gaza sedang recording" />
+            <div class="gallery-caption">
+              <h4>Stage 4: Editing Video</h4>
+              <p>Mengedit video biar enak ditonton</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="Port5.png" alt="Editing Process - Gaza editing video dengan serius" />
+            <div class="gallery-caption">
+              <h4>Stage 5: Editing Thumbnail</h4>
+              <p>Ngedit thumbnail biar keliatan lebih kece.</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="Port6.png" alt="Thumbnail Design - Gaza mendesain thumbnail yang menarik" />
+            <div class="gallery-caption">
+              <h4>Stage 6: Upload ke Youtube</h4>
+              <p>Langsung upload ke Youtube</p>
+            </div>
+          </div>
+        </div>
+        <!-- YouTube Video -->
+        <div class="video-showcase">
+          <div class="port-card">
+            <h3>🎉 Final Result: </h3>
+            <p>Setelah semua proses di atas, ini dia hasil akhirnya, Semoga menghibur dan jangan lupa subscribe! 😉</p>
+            <div>
+              <!-- Ganti YOUR_VIDEO_ID dengan ID YouTube-mu -->
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/SAnDbqHbN8k?si=Z-1Rni5Zl12vuIUD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+      <div class="loading-content">
+        <div class="loading-logo">
+          <img src="animatedlogo.gif" alt="Loading Logo" />
+        </div>
+        <div class="loading-text">
+          <h3>Loading Content</h3>
+          <div class="loading-bar">
+            <div class="loading-progress"></div>
+          </div>
+          <p>Tunggu sebentar ya...</p>
+        </div>
+      </div>
+    </div>
+    <!-- FOOTER -->
+    <footer>
+      <a href="https://www.instagram.com/ghast_z/" target="_blank">
+      <img src="insWhite.png" alt="IG" /> @ghast_z
+      </a>
+      <a href="https://wa.me/6281224344973" target="_blank">
+      <img src="whaWhite.png" alt="WA" /> +6281224344973
+      </a>
+      <a href="https://www.tiktok.com/@nowayout21" target="_blank">
+      <img src="tikWhite.png" alt="TikTok" /> @nowayout21
+      </a>
+      <a href="https://www.youtube.com/@litchflick" target="_blank">
+      <img src="—Pngtree—youtube white icon_3570413.png" alt="YouTube" /> Litch Flick
+      </a>
+    </footer>
+    <!-- Placeholder for future JavaScript -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const musicToggle = document.getElementById('music-toggle');
+        const bgMusic = document.getElementById('bg-music');
+        const volumeControl = document.getElementById('volume-control');
+        const volumeSlider = document.getElementById('volume-slider');
+      // ====== DARK/LIGHT MODE FUNCTIONALITY ======
+      const themeToggle = document.getElementById('theme-mode-toggle');
+      const themeIcon = document.querySelector('.theme-icon');
+      
+      // Check saved theme
+      const isLightMode = localStorage.getItem('theme') === 'light';
+      
+      // Apply saved theme
+      if (isLightMode) {
+        document.body.classList.add('light-mode');
+        themeToggle.checked = true;
+        themeIcon.textContent = '☀️';
+      }
+      
+      // Theme toggle event
+      themeToggle.addEventListener('change', function() {
+        if (this.checked) {
+          document.body.classList.add('light-mode');
+          localStorage.setItem('theme', 'light');
+          themeIcon.textContent = '☀️';
+        } else {
+          document.body.classList.remove('light-mode');
+          localStorage.setItem('theme', 'dark');
+          themeIcon.textContent = '🌙';
+        }
+      });  
+        // Set initial volume to 50%
+        bgMusic.volume = 0.5;
+        
+        // Toggle music + show volume control
+        musicToggle.addEventListener('change', async function() {
+          const label = this.closest('label');
+          
+          if (this.checked) {
+            label.classList.add('active');
+            // Show volume control
+            volumeControl.classList.add('show');
+            
+            try {
+              await bgMusic.play();
+              await fadeIn(bgMusic, 2000);
+              localStorage.setItem('musicOn', 'true');
+            } catch (error) {
+              console.log('Play failed:', error);
+              this.checked = false;
+              label.classList.remove('active');
+              volumeControl.classList.remove('show');
+            }
+          } else {
+            label.classList.remove('active');
+            // Hide volume control
+            volumeControl.classList.remove('show');
+            await fadeOut(bgMusic, 1500);
+            localStorage.setItem('musicOn', 'false');
+          }
+        });
+        
+        // Volume slider functionality
+        volumeSlider.addEventListener('input', function() {
+          const volume = this.value / 100;
+          bgMusic.volume = volume;
+          
+          // Optional: Save volume preference
+          localStorage.setItem('musicVolume', volume);
+        });
+        
+        // Load saved volume
+        const savedVolume = localStorage.getItem('musicVolume');
+        if (savedVolume) {
+          bgMusic.volume = parseFloat(savedVolume);
+          volumeSlider.value = savedVolume * 100;
+        }
+        
+        // Close volume control when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!e.target.closest('.music-toggle-container') && 
+              !e.target.closest('.volume-control') &&
+              volumeControl.classList.contains('show')) {
+            volumeControl.classList.remove('show');
+          }
+        });
+        
+        // Fade functions (tetap sama)
+        function fadeIn(audio, duration = 2000) {
+          return new Promise((resolve) => {
+            const startVolume = 0;
+            const targetVolume = audio.volume; // Use current volume setting
+            const startTime = performance.now();
+            
+            function updateVolume() {
+              const elapsed = performance.now() - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const easeProgress = 1 - Math.pow(1 - progress, 2);
+              audio.volume = startVolume + (targetVolume - startVolume) * easeProgress;
+              
+              if (progress < 1) {
+                requestAnimationFrame(updateVolume);
+              } else {
+                audio.volume = targetVolume;
+                resolve();
+              }
+            }
+            updateVolume();
+          });
+        }
+        
+        function fadeOut(audio, duration = 1500) {
+          return new Promise((resolve) => {
+            const startVolume = audio.volume;
+            const startTime = performance.now();
+            
+            function updateVolume() {
+              const elapsed = performance.now() - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const easeProgress = 1 - Math.pow(1 - progress, 2);
+              audio.volume = startVolume * (1 - easeProgress);
+              
+              if (progress < 1) {
+                requestAnimationFrame(updateVolume);
+              } else {
+                audio.volume = 0;
+                audio.pause();
+                audio.currentTime = 0;
+                resolve();
+              }
+            }
+            updateVolume();
+          });
+        }
+      });
+      	
+      // Sidebar buat development progress
+      document.addEventListener('DOMContentLoaded', function() {
+        const logo = document.querySelector('nav img');
+        const devSidebar = document.getElementById('dev-sidebar');
+        const closeSidebar = document.getElementById('close-sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const cycleItems = document.querySelectorAll('.cycle-item');
+      
+        // Function untuk buka sidebar
+        function openSidebar() {
+          devSidebar.classList.add('active');
+          sidebarOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      
+        // Function untuk tutup sidebar
+        function closeSidebarFunc() {
+          devSidebar.classList.remove('active');
+          sidebarOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      
+        // 1. Click Logo untuk buka sidebar
+        logo.addEventListener('click', openSidebar);
+      
+        // 2. Click Close Button
+        closeSidebar.addEventListener('click', closeSidebarFunc);
+      
+        // 3. Click Overlay
+        sidebarOverlay.addEventListener('click', closeSidebarFunc);
+      
+        // 4. ESC Key untuk close
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && devSidebar.classList.contains('active')) {
+            closeSidebarFunc();
+          }
+        });
+      
+        // 5. Keyboard Shortcut: Ctrl + D untuk toggle sidebar
+        document.addEventListener('keydown', function(e) {
+          if (e.ctrlKey && e.key === 'd') {
+            e.preventDefault();
+            if (devSidebar.classList.contains('active')) {
+              closeSidebarFunc();
+            } else {
+              openSidebar();
+            }
+          }
+        });
+      
+        // 6. Cycle Items - Hanya update active state, link handle sendiri
+        cycleItems.forEach(item => {
+          item.addEventListener('click', function(e) {
+            // Prevent default hanya jika bukan link yang diklik
+            if (!e.target.classList.contains('cycle-link')) {
+              // Update active state
+              cycleItems.forEach(i => i.classList.remove('active'));
+              this.classList.add('active');
+              
+              // Link akan handle navigation via HTML target="_blank"
+            }
+          });
+        });
+      
+        // 7. Keyboard Navigation untuk cycle items
+        document.addEventListener('keydown', function(e) {
+          if (devSidebar.classList.contains('active')) {
+            const activeItem = document.querySelector('.cycle-item.active');
+            let nextItem;
+            
+            if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              nextItem = activeItem.nextElementSibling;
+            } else if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              nextItem = activeItem.previousElementSibling;
+            } else if (e.key === 'Enter' && activeItem) {
+              e.preventDefault();
+              // Trigger click pada link di dalam active item
+              const link = activeItem.querySelector('.cycle-link');
+              if (link) {
+                link.click();
+              }
+            } else if (e.key === 'o' && activeItem) {
+              e.preventDefault();
+              // Shortcut 'o' untuk open in new tab
+              const link = activeItem.querySelector('.cycle-link');
+              if (link) {
+                link.click();
+              }
+            }
+            
+            if (nextItem && nextItem.classList.contains('cycle-item')) {
+              cycleItems.forEach(i => i.classList.remove('active'));
+              nextItem.classList.add('active');
+              nextItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          }
+        });
+      });
+      	
+      // Skill Stat buat di bagian Home
+      document.addEventListener('DOMContentLoaded', function() {
+        const profileImg = document.getElementById('profile-img');
+        const skillsStats = document.getElementById('skills-stats');
+        const skillProgresses = document.querySelectorAll('.skill-progress');
+        
+        let statsVisible = false;
+      
+        // Toggle skills stats when clicking profile image
+        profileImg.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          if (!statsVisible) {
+            // Show stats
+            skillsStats.classList.add('show');
+            statsVisible = true;
+            
+            // Animate progress bars
+            setTimeout(() => {
+              skillProgresses.forEach(progress => {
+                const width = progress.getAttribute('data-width');
+                progress.style.width = width + '%';
+              });
+            }, 300);
+          } else {
+            // Hide stats
+            skillsStats.classList.remove('show');
+            statsVisible = false;
+            
+            // Reset progress bars
+            setTimeout(() => {
+              skillProgresses.forEach(progress => {
+                progress.style.width = '0%';
+              });
+            }, 300);
+          }
+        });
+      	
+       // Theme toggle event - biar gk ilang pas ganti tema
+        themeToggle.addEventListener('change', function() {
+          // Stats visibility tetap dipertahankan
+          // Progress bars tetap pada state semula
+          if (statsVisible) {
+            // Pastikan stats tetap visible setelah theme change
+            setTimeout(() => {
+              skillsStats.classList.add('show');
+              skillProgresses.forEach(progress => {
+                const width = progress.getAttribute('data-width');
+                progress.style.width = width + '%';
+              });
+            }, 100);
+          }
+        });
+      	
+        // Hide stats when clicking outside (optional)
+        document.addEventListener('click', function(e) {
+          if (statsVisible && 
+              !skillsStats.contains(e.target) && 
+              e.target !== profileImg) {
+            skillsStats.classList.remove('show');
+            statsVisible = false;
+            
+            setTimeout(() => {
+              skillProgresses.forEach(progress => {
+                progress.style.width = '0%';
+              });
+            }, 300);
+          }
+        });
+      });
+      
+// Comprehensive Loading Screen - Handles all navigation scenarios
+document.addEventListener('DOMContentLoaded', function() {
+    const loadingScreen = document.getElementById('loading-screen');
+    
+    // Apply theme consistency
+    if (sessionStorage.getItem('previousTheme') === 'light') {
+        document.body.classList.add('light-mode');
+        const themeToggle = document.getElementById('theme-mode-toggle');
+        if (themeToggle) themeToggle.checked = true;
+        const themeIcon = document.querySelector('.theme-icon');
+        if (themeIcon) themeIcon.textContent = '☀️';
+    }
+    
+    // INTERCEPT ALL NAVIGATION CLICKS
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        
+        if (link && link.href) {
+            const href = link.getAttribute('href');
+            
+            // Skip external links, mailto, tel, etc.
+            if (link.target === '_blank' || 
+                href.includes('mailto:') || 
+                href.includes('tel:') ||
+                link.hasAttribute('download')) {
+                return; // Let these behave normally
+            }
+            
+            // Handle navigation to Index.html (any section)
+            if (href.includes('Index.html')) {
+                e.preventDefault();
+                console.log('Loading screen triggered for:', href);
+                showLoading(href);
+            }
+            
+            // Handle same-page anchor links (smooth scrolling)
+            else if (href.startsWith('#') && !href.includes('.html')) {
+                // This is same-page navigation - no loading screen needed
+                console.log('Same page navigation to:', href);
+                // Let the default anchor behavior happen
+            }
+        }
+    });
+    
+    function showLoading(destination) {
+        // Save current theme state
+        sessionStorage.setItem('previousTheme', 
+            document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        
+        // Show loading screen
+        loadingScreen.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Navigate after delay
+        setTimeout(() => {
+            window.location.href = destination;
+        }, 800);
+    }
+    
+    // Hide loading when page fully loads
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            loadingScreen.classList.remove('active');
+            document.body.style.overflow = '';
+        }, 300);
+    });
+    
+    // Fallback safety
+    setTimeout(() => {
+        loadingScreen.classList.remove('active');
+        document.body.style.overflow = '';
+    }, 3000);
+});
+    </script>
+  </body>
+</html>
