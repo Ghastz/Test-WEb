@@ -455,13 +455,25 @@
       max-width: 100%;
       box-sizing: border-box;
       }
-      section:target {
+/* ====== SECTION VISIBILITY CONTROL ====== */
+    /* Semua section hidden awal -  */
+  	  section {
+  	  opacity: 0;
+  	  pointer-events: none;
+  	  position: absolute;
+  	  transition: opacity 0.6s ease;
+  	  width: 100%;
+  	  left: 0;
+  	  top: 0;
+	  }
+
+ 	  section.active {
       opacity: 1;
-      transform: translateX(0);
       pointer-events: auto;
-      position: relative;
-      }
-      body:not(:has(:target)) #home {
+   	  position: relative;
+	  }
+      /* Pastikan home visible saat pertama load - TANPA CSS :target */
+      #home.active {
       opacity: 1;
       transform: translateX(0);
       pointer-events: auto;
@@ -975,6 +987,99 @@
       min-height: auto;
       }
       }
+      /* ====== LOADING SCREEN ====== */
+      .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #111, #2b2b2b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s ease;
+      }
+      .loading-screen.active {
+      opacity: 1;
+      visibility: visible;
+      }
+      .loading-content {
+      text-align: center;
+      color: white;
+      }
+      .loading-logo img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+      }
+      .loading-text h3 {
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      color: #1db954; /* Dark mode color */
+      }
+      .loading-bar {
+      width: 300px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      margin: 20px auto;
+      overflow: hidden;
+      }
+      .loading-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #1db954, #1ed760); /* Dark mode gradient */
+      border-radius: 2px;
+      width: 0%;
+      animation: loading 1.5s ease-in-out infinite;
+      }
+      .loading-text p {
+      color: #ccc;
+      font-size: 0.9em;
+      margin-top: 15px;
+      }
+      /* ====== LIGHT MODE STYLES ====== */
+      body.light-mode .loading-screen {
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      }
+      body.light-mode .loading-content {
+      color: #333;
+      }
+      body.light-mode .loading-text h3 {
+      color: #007acc; /* Light mode color */
+      }
+      body.light-mode .loading-bar {
+      background: rgba(0, 0, 0, 0.1);
+      }
+      body.light-mode .loading-progress {
+      background: linear-gradient(90deg, #007acc, #0088e6); /* Light mode gradient */
+      }
+      body.light-mode .loading-text p {
+      color: #666;
+      }
+      /* ====== ANIMATIONS ====== */
+      @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+      }
+      @keyframes loading {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(0%); }
+      100% { transform: translateX(100%); }
+      }
+      /* Smooth transitions for theme switching */
+      .loading-screen,
+      .loading-text h3,
+      .loading-bar,
+      .loading-progress,
+      .loading-text p {
+      transition: all 0.5s ease;
+      }		
       /* ====== FOOTER ====== */
       footer {
       background: rgba(20, 20, 20, 0.95);
@@ -1019,7 +1124,7 @@
       <img src="animatedlogo.gif" alt="Logo Gaza" />
       <a href="#home">Home</a>
       <a href="#profile">Profile</a>
-      <a href="#portfolio">Portofolio</a>
+      <a href="Portofolio.html#portfolio">Portofolio</a>
       <a href="#askme">Ask Me</a>
       <div class="theme-toggle-container">
         <!-- Dark/Light Mode Toggle -->
@@ -1049,9 +1154,15 @@
       </div>
       <div class="sidebar-content">
         <div class="cycle-item active">
-          <span class="cycle-number">Cycle 11</span>
-          <span class="cycle-name">Feature Update</span>
+          <span class="cycle-number">Cycle 12</span>
+          <span class="cycle-name">Misahin Portofolio dan nambah Section(AskMe)</span>
           <span class="cycle-date">Current</span>
+        </div>
+        <div class="cycle-item">
+          <span class="cycle-number">Cycle 11</span>
+          <span class="cycle-name">Section Update(Portofolio)</span>
+          <span class="cycle-date">Selasa, 2 November 2025</span>
+          <a href="Cycle 11.html" target="_blank" class="cycle-link"></a>
         </div>
         <div class="cycle-item">
           <span class="cycle-number">Cycle 10</span>
@@ -1134,7 +1245,7 @@
           <p>
             Yuk, jelajahi <strong>Profile</strong> saya dengan mengklik gambar disamping dan klik tombol <strong>Portofolio</strong> dibawah ini untuk melihat perjalanan dan keterampilan yang saya kembangkan sejauh ini. Jika penasaran dengan proses development web ini, kamu bisa klik <strong>Logo</strong> yang berputar diatas atau dengan menekan <strong>CTRL+D</strong>.
           </p>
-          <a href="#portfolio" class="btn">Lihat Portfolio</a>
+          <a href="Portofolio.html#portfolio" class="btn">Lihat Portfolio</a>
         </div>
         <div class="hero-profile">
           <div class="profile-image-container">
@@ -1221,72 +1332,6 @@
         </div>
       </div>
     </section>
-    <!-- PORTFOLIO -->
-    <section id="portfolio">
-      <h2>Portfolio</h2>
-      <div class="port-card">
-        <p align="left"> Selain mempelajari teknologi, saya juga punya ketertarikan sebagai content creator YouTube, di mana saya berubah dari yang biasanya troubleshoot jaringan jadi troubleshoot timeline editing!
-          Di sini saya tunjukkan proses behind-the-scenes yang jarang orang liat, dari ngerekam klip aneh-aneh, sampe begadang editing. 
-        </p>
-        <!-- Gallery Grid -->
-        <div class="portfolio-gallery">
-          <div class="gallery-item">
-            <img src="Port2.png" alt="Ideation & Planning - Gaza brainstorming content ideas" />
-            <div class="gallery-caption">
-              <h4>Stage 1: Planning Content</h4>
-              <p>Nyari ide untuk konten yang mau dibuat</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="Port1.png" alt="Script Writing - Gaza menulis script dengan serius" />
-            <div class="gallery-caption">
-              <h4>Stage 2: Setting OBS</h4>
-              <p>Nyetting OBS biar smooth pas ngerecord konten</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="Port3.png" alt="Setup Recording - Gaza menyiapkan peralatan recording" />
-            <div class="gallery-caption">
-              <h4>Stage 3: Recording</h4>
-              <p>Record gameplay</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="Port4.png" alt="Recording Session - Gaza sedang recording" />
-            <div class="gallery-caption">
-              <h4>Stage 4: Editing Video</h4>
-              <p>Mengedit video biar enak ditonton</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="Port5.png" alt="Editing Process - Gaza editing video dengan serius" />
-            <div class="gallery-caption">
-              <h4>Stage 5: Editing Thumbnail</h4>
-              <p>Ngedit thumbnail biar keliatan lebih kece.</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="Port6.png" alt="Thumbnail Design - Gaza mendesain thumbnail yang menarik" />
-            <div class="gallery-caption">
-              <h4>Stage 6: Upload ke Youtube</h4>
-              <p>Langsung upload ke Youtube</p>
-            </div>
-          </div>
-        </div>
-        <!-- YouTube Video -->
-        <div class="video-showcase">
-          <div class="port-card">
-            <h3>🎉 Final Result: </h3>
-            <p>Setelah semua proses di atas, ini dia hasil akhirnya, Semoga menghibur dan jangan lupa subscribe! 😉</p>
-            <div class="video-container">
-              <!-- Ganti YOUR_VIDEO_ID dengan ID YouTube-mu -->
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/SAnDbqHbN8k?si=Z-1Rni5Zl12vuIUD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-				</iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
     <!-- ASK ME -->
     <section id="askme">
       <h2>Ask Me!</h2>
@@ -1321,8 +1366,8 @@
       <a href="https://www.instagram.com/ghast_z/" target="_blank">
       <img src="insWhite.png" alt="IG" /> @ghast_z
       </a>
-      <a href="#">
-      <img src="whaWhite.png" alt="WA" /> (+62 masih Placeholder)
+      <a href="https://wa.me/6281224344973" target="_blank">
+      <img src="whaWhite.png" alt="WA" /> +6281224344973
       </a>
       <a href="https://www.tiktok.com/@nowayout21" target="_blank">
       <img src="tikWhite.png" alt="TikTok" /> @nowayout21
@@ -1331,6 +1376,21 @@
       <img src="—Pngtree—youtube white icon_3570413.png" alt="YouTube" /> Litch Flick
       </a>
     </footer>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+      <div class="loading-content">
+        <div class="loading-logo">
+          <img src="animatedlogo.gif" alt="Loading Logo" />
+        </div>
+        <div class="loading-text">
+          <h3>Loading Portfolio</h3>
+          <div class="loading-bar">
+            <div class="loading-progress"></div>
+          </div>
+          <p>Tunggu sebentar ya...</p>
+        </div>
+      </div>
+    </div>
     <!-- Placeholder for future JavaScript -->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -1639,6 +1699,113 @@
             }, 300);
           }
         });
+      });
+      
+      // FIXED SECTION CONTROL - UNTUK index.html
+      document.addEventListener('DOMContentLoaded', function() {
+      const loadingScreen = document.getElementById('loading-screen');
+      
+      // Apply theme
+      if (sessionStorage.getItem('previousTheme') === 'light') {
+        document.body.classList.add('light-mode');
+        const themeToggle = document.getElementById('theme-mode-toggle');
+        if (themeToggle) themeToggle.checked = true;
+        const themeIcon = document.querySelector('.theme-icon');
+        if (themeIcon) themeIcon.textContent = '☀️';
+      }
+      
+      // ✅ SECTION VISIBILITY CONTROL - SIMPLE & CLEAN
+      function setupSections() {
+        const hash = window.location.hash;
+        const targetId = hash ? hash.substring(1) : 'home';
+        
+        console.log('Setting up sections, target:', targetId);
+        
+        // Remove active class dari semua section
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Add active class ke target section
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            console.log('Activating section:', targetId);
+            targetSection.classList.add('active');
+        }
+        
+        // Fallback: jika tidak ada section active, aktifkan home
+        const activeSections = document.querySelectorAll('section.active');
+        if (activeSections.length === 0) {
+            document.getElementById('home').classList.add('active');
+        }
+      }
+      
+      // Setup sections segera setelah DOM ready
+      setTimeout(() => {
+        setupSections();
+      }, 10);
+      
+      // INTERCEPT NAVIGATION
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        
+        if (link && link.href) {
+            const href = link.getAttribute('href');
+            
+            // Skip external links, anchors, etc.
+            if (link.target === '_blank' || 
+                href.includes('mailto:') || 
+                href.includes('tel:') ||
+                href.startsWith('#') ||
+                link.hasAttribute('download')) {
+                return;
+            }
+            
+            // Check if it's navigation between our pages
+            if (href.includes('Portofolio.html') || href.includes('index.html')) {
+                e.preventDefault();
+                
+                console.log('Navigating to:', href);
+                showLoading(href);
+            }
+        }
+      });
+      
+      function showLoading(destination) {
+        // Save theme
+        sessionStorage.setItem('previousTheme', 
+            document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        
+        loadingScreen.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        setTimeout(() => {
+            window.location.href = destination;
+        }, 1800);
+      }
+      
+      // Hide loading on page load
+      window.addEventListener('load', function() {
+        // Pastikan sections sudah benar
+        setupSections();
+        
+        setTimeout(() => {
+            loadingScreen.classList.remove('active');
+            document.body.style.overflow = '';
+        }, 600);
+      });
+      
+      // Handle hash changes (untuk anchor links dalam page yang sama)
+      window.addEventListener('hashchange', function() {
+        console.log('Hash changed to:', window.location.hash);
+        setupSections();
+      });
+      
+      // Fallback
+      setTimeout(() => {
+        loadingScreen.classList.remove('active');
+        document.body.style.overflow = '';
+      }, 4000);
       });
     </script>
   </body>
