@@ -455,23 +455,22 @@
       max-width: 100%;
       box-sizing: border-box;
       }
-/* ====== SECTION VISIBILITY CONTROL ====== */
-    /* Semua section hidden awal -  */
-  	  section {
-  	  opacity: 0;
-  	  pointer-events: none;
-  	  position: absolute;
-  	  transition: opacity 0.6s ease;
-  	  width: 100%;
-  	  left: 0;
-  	  top: 0;
-	  }
-
- 	  section.active {
+      /* ====== SECTION VISIBILITY CONTROL ====== */
+      /* Semua section hidden awal -  */
+      section {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      transition: opacity 0.6s ease;
+      width: 100%;
+      left: 0;
+      top: 0;
+      }
+      section.active {
       opacity: 1;
       pointer-events: auto;
-   	  position: relative;
-	  }
+      position: relative;
+      }
       /* Pastikan home visible saat pertama load - TANPA CSS :target */
       #home.active {
       opacity: 1;
@@ -1049,6 +1048,9 @@
       body.light-mode .loading-content {
       color: #333;
       }
+      body.light-mode .loading-logo img {
+      filter: brightness(0%); /* Jadi hitam di light mode */
+      }
       body.light-mode .loading-text h3 {
       color: #007acc; /* Light mode color */
       }
@@ -1079,6 +1081,39 @@
       .loading-progress,
       .loading-text p {
       transition: all 0.5s ease;
+      }	
+      /* ====== LANGUAGE SWITCHER ====== */
+      .language-switcher {
+      margin-left: 20px;
+      }
+      .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85em;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      }
+      .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+      }
+      .lang-icon {
+      font-size: 1em;
+      }
+      /* Light Mode Styles */
+      body.light-mode .lang-btn {
+      color: #333;
+      border-color: rgba(0, 0, 0, 0.3);
+      }
+      body.light-mode .lang-btn:hover {
+      background: rgba(0, 0, 0, 0.05);
       }		
       /* ====== FOOTER ====== */
       footer {
@@ -1155,7 +1190,7 @@
       <div class="sidebar-content">
         <div class="cycle-item active">
           <span class="cycle-number">Cycle 12</span>
-          <span class="cycle-name">Misahin Portofolio dan nambah Section(AskMe)</span>
+          <span class="cycle-name">Adding Translation Button, Separating Portofolio</span>
           <span class="cycle-date">Current</span>
         </div>
         <div class="cycle-item">
@@ -1196,13 +1231,13 @@
         </div>
         <div class="cycle-item">
           <span class="cycle-number">Cycle 5</span>
-          <span class="cycle-name">Penambahan Logo, Bugfixing</span>
+          <span class="cycle-name">Adding Logo</span>
           <span class="cycle-date">Minggu, 12 Oktober 2025</span>
           <a href="Cycle 5.html" target="_blank" class="cycle-link"></a>
         </div>
         <div class="cycle-item">
           <span class="cycle-number">Cycle 4</span>
-          <span class="cycle-name">Design Awal</span>
+          <span class="cycle-name">Early Design</span>
           <span class="cycle-date">Minggu, 12 Oktober 2025</span>
           <a href="Cycle 4.html" target="_blank" class="cycle-link"></a>
         </div>
@@ -1375,6 +1410,13 @@
       <a href="https://www.youtube.com/@litchflick" target="_blank">
       <img src="—Pngtree—youtube white icon_3570413.png" alt="YouTube" /> Litch Flick
       </a>
+      <!-- Tombol translate -->
+      <div class="language-switcher">
+        <button id="language-toggle" class="lang-btn">
+        <span class="lang-text">ID</span>
+        <span class="lang-icon">🌐</span>
+        </button>
+      </div>
     </footer>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
@@ -1429,6 +1471,7 @@
         
         // Toggle music + show volume control
         musicToggle.addEventListener('change', async function() {
+
           const label = this.closest('label');
           
           if (this.checked) {
@@ -1807,6 +1850,160 @@
         document.body.style.overflow = '';
       }, 4000);
       });
+      // ====== LANGUAGE TRANSLATION FUNCTIONALITY ======
+      document.addEventListener('DOMContentLoaded', function() {
+      const languageToggle = document.getElementById('language-toggle');
+      const langText = document.querySelector('.lang-text');
+      
+      // Check saved language preference
+      const isEnglish = localStorage.getItem('language') === 'en';
+      
+      // Apply saved language
+      if (isEnglish) {
+      translateToEnglish();
+      langText.textContent = 'EN';
+      }
+      
+      // Language toggle event
+      languageToggle.addEventListener('click', function() {
+      if (langText.textContent === 'ID') {
+      translateToEnglish();
+      langText.textContent = 'EN';
+      localStorage.setItem('language', 'en');
+      } else {
+      translateToIndonesian();
+      langText.textContent = 'ID';
+      localStorage.setItem('language', 'id');
+      }
+      });
+      
+      function translateToEnglish() {
+      // Home Section
+      document.querySelector('#home .hero-text h1').textContent = "Welcome to Gaza's Portfolio";
+      document.querySelector('#home .hero-text p:nth-of-type(1)').innerHTML = 
+      "Hello, I'm <strong>Gaza Zakian</strong>, a student at STMIK LIKMI interested in the world of technology — especially in the field of <strong>Artificial Intelligence</strong>.";
+      document.querySelector('#home .hero-text p:nth-of-type(2)').innerHTML = 
+      "Explore my <strong>Profile</strong> by clicking the image on the side and click the <strong>Portfolio</strong> button below to see my journey and skills developed so far. If you're curious about the development process of this website, you can click the rotating <strong>Logo</strong> above or press <strong>CTRL+D</strong>.";
+      document.querySelector('#home .btn').textContent = "View Portfolio";
+      document.querySelector('.hero-profile p').textContent = "Network and Computer Engineer";
+      
+      // Skills Stats
+      document.querySelector('#skills-stats h4').textContent = "Skills Level";
+      document.querySelectorAll('.skill-name')[0].textContent = "Networking";
+      document.querySelectorAll('.skill-name')[1].textContent = "Hardware";
+      document.querySelectorAll('.skill-name')[2].textContent = "Software";
+      document.querySelectorAll('.skill-name')[3].textContent = "Troubleshooting";
+      document.querySelector('.cta-btn').textContent = "See Full Profile →";
+      
+      // Profile Section
+      document.querySelector('#profile h2').textContent = "Profile";
+      document.querySelector('.profile-left p').innerHTML = 
+      "I'm a student seeking experience while studying. I adapt easily, enjoy learning new things, and like working with others. Currently looking for opportunities to gain experience and develop my skills to become more proficient in the future.";
+      document.querySelector('.profile-left h3:nth-of-type(1)').textContent = "Work Experience";
+      document.querySelectorAll('.profile-left ul:nth-of-type(1) li')[0].innerHTML = 
+      "<strong>QSA Computer</strong> — Staff / Technician (Nov 2023 – Feb 2024)";
+      document.querySelectorAll('.profile-left ul:nth-of-type(1) li')[1].innerHTML = 
+      "<strong>Dislitbangau</strong> — Intern / IT Support (Jul – Oct 2022)";
+      document.querySelectorAll('.profile-left ul:nth-of-type(1) li')[2].innerHTML = 
+      "<strong>Diskominfo</strong> — Freelance / Network Engineer (Jan – Jul 2022)";
+      
+      document.querySelector('.profile-left h3:nth-of-type(2)').textContent = "Education";
+      document.querySelectorAll('.profile-left ul:nth-of-type(2) li')[0].textContent = 
+      "STMIK LIKMI — Informatics and AI Technology (Ongoing)";
+      document.querySelectorAll('.profile-left ul:nth-of-type(2) li')[1].textContent = 
+      "SMK ICB Cinta Teknika — Computer and Network Engineering (2020–2023)";
+      
+      document.querySelector('.profile-left h3:nth-of-type(3)').textContent = "Certification";
+      document.querySelectorAll('.profile-left ul:nth-of-type(3) li')[0].textContent = 
+      "MikroTik Certified Network Associate-MTCNA";
+      document.querySelectorAll('.profile-left ul:nth-of-type(3) li')[1].textContent = 
+      "Cybersecurity Fundamental";
+      
+      document.querySelector('.download-btn').innerHTML = "📥 Download My CV";
+      
+      document.querySelector('.profile-right h3').textContent = "Skills";
+      document.querySelectorAll('.profile-right .skills li')[0].textContent = "Network Engineering";
+      document.querySelectorAll('.profile-right .skills li')[1].textContent = "Hardware and Software Maintenance";
+      document.querySelectorAll('.profile-right .skills li')[2].textContent = "Troubleshooting";
+      document.querySelectorAll('.profile-right .skills li')[3].textContent = "Teamwork";
+      document.querySelectorAll('.profile-right .skills li')[4].textContent = "Time Management";
+      
+      // Ask Me Section
+      document.querySelector('#askme h2').textContent = "Ask Me!";
+      document.querySelector('.map-section h3').textContent = "📍 Find Me Here";
+      document.querySelector('.alt-contacts p').textContent = "Or contact me directly:";
+      
+      document.querySelector('.form-section h3').textContent = "💬 Send Me a Message";
+      document.querySelectorAll('.contact-form input')[0].placeholder = "Your Name";
+      document.querySelectorAll('.contact-form input')[1].placeholder = "Your Email";
+      document.querySelector('.contact-form textarea').placeholder = "Your Message...";
+      document.querySelector('.contact-form button').textContent = "Send Message";
+      }
+      
+      function translateToIndonesian() {
+      // Home Section
+      document.querySelector('#home .hero-text h1').textContent = "Welcome to Gaza's Portfolio";
+      document.querySelector('#home .hero-text p:nth-of-type(1)').innerHTML = 
+      "Halo, saya <strong>Gaza Zakian</strong>, mahasiswa STMIK LIKMI yang tertarik pada dunia teknologi — khususnya dibidang <strong>Artificial Intelligence</strong>.";
+      document.querySelector('#home .hero-text p:nth-of-type(2)').innerHTML = 
+      "Yuk, jelajahi <strong>Profile</strong> saya dengan mengklik gambar disamping dan klik tombol <strong>Portofolio</strong> dibawah ini untuk melihat perjalanan dan keterampilan yang saya kembangkan sejauh ini. Jika penasaran dengan proses development web ini, kamu bisa klik <strong>Logo</strong> yang berputar diatas atau dengan menekan <strong>CTRL+D</strong>.";
+      document.querySelector('#home .btn').textContent = "Lihat Portfolio";
+      document.querySelector('.hero-profile p').textContent = "Network and Computer Engineer";
+      
+      // Skills Stats
+      document.querySelector('#skills-stats h4').textContent = "Skills Level";
+      document.querySelectorAll('.skill-name')[0].textContent = "Networking";
+      document.querySelectorAll('.skill-name')[1].textContent = "Hardware";
+      document.querySelectorAll('.skill-name')[2].textContent = "Software";
+      document.querySelectorAll('.skill-name')[3].textContent = "Troubleshooting";
+      document.querySelector('.cta-btn').textContent = "See Full Profile →";
+      
+      // Profile Section
+      document.querySelector('#profile h2').textContent = "Profile";
+      document.querySelector('.profile-left p').innerHTML = 
+      "Saya mahasiswa yang lagi nyari pengalaman sambil kuliah. Saya gampang nyesuain diri, suka belajar hal baru, dan seneng kerja bareng orang lain. Sekarang lagi coba cari kesempatan buat nambah pengalaman dan ngembangin skill saya biar makin mantap ke depannya.";
+      document.querySelector('.profile-left h3:nth-of-type(1)').textContent = "Work Experience";
+      document.querySelectorAll('.profile-left ul:nth-of-type(1) li')[0].innerHTML = 
+      "<strong>QSA Computer</strong> — Staff / Technician (Nov 2023 – Feb 2024)";
+      document.querySelectorAll('.profile-left ul:nth-of-type(1) li')[1].innerHTML = 
+      "<strong>Dislitbangau</strong> — Intern / IT Support (Jul – Okt 2022)";
+      document.querySelectorAll('.profile-left ul:nth-of-type(1) li')[2].innerHTML = 
+      "<strong>Diskominfo</strong> — Freelance / Network Engineer (Jan – Jul 2022)";
+      
+      document.querySelector('.profile-left h3:nth-of-type(2)').textContent = "Education";
+      document.querySelectorAll('.profile-left ul:nth-of-type(2) li')[0].textContent = 
+      "STMIK LIKMI — Informatics and AI Technology (Ongoing)";
+      document.querySelectorAll('.profile-left ul:nth-of-type(2) li')[1].textContent = 
+      "SMK ICB Cinta Teknika — Computer and Network Engineering (2020–2023)";
+      
+      document.querySelector('.profile-left h3:nth-of-type(3)').textContent = "Certification";
+      document.querySelectorAll('.profile-left ul:nth-of-type(3) li')[0].textContent = 
+      "MikroTik Certified Network Associate-MTCNA";
+      document.querySelectorAll('.profile-left ul:nth-of-type(3) li')[1].textContent = 
+      "Cybersecurity Fundamental";
+      
+      document.querySelector('.download-btn').innerHTML = "📥 Download My CV";
+      
+      document.querySelector('.profile-right h3').textContent = "Skills";
+      document.querySelectorAll('.profile-right .skills li')[0].textContent = "Network Engineering";
+      document.querySelectorAll('.profile-right .skills li')[1].textContent = "Hardware and Software Maintenance";
+      document.querySelectorAll('.profile-right .skills li')[2].textContent = "Troubleshooting";
+      document.querySelectorAll('.profile-right .skills li')[3].textContent = "Teamwork";
+      document.querySelectorAll('.profile-right .skills li')[4].textContent = "Time Management";
+      
+      // Ask Me Section
+      document.querySelector('#askme h2').textContent = "Ask Me!";
+      document.querySelector('.map-section h3').textContent = "📍 Find Me Here";
+      document.querySelector('.alt-contacts p').textContent = "Atau hubungi saya langsung:";
+      
+      document.querySelector('.form-section h3').textContent = "💬 Send Me a Message";
+      document.querySelectorAll('.contact-form input')[0].placeholder = "Your Name";
+      document.querySelectorAll('.contact-form input')[1].placeholder = "Your Email";
+      document.querySelector('.contact-form textarea').placeholder = "Your Message...";
+      document.querySelector('.contact-form button').textContent = "Send Message";
+      }
+      });		
+      
     </script>
   </body>
 </html>

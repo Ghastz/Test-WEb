@@ -927,11 +927,11 @@
       width: 100%;
       }
       .contact-form button:hover {
-      background: #1ed760; /* Dark mode: HIJAU terang */
+      background: #1ed760; 
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
       }
-      /* Light Mode - Button jadi BIRU */
+      /* === LIGHT MODE STYLES (Button jadi BIRU) === */
       body.light-mode .contact-form button {
       background: #007acc; /* Light mode: BIRU */
       box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
@@ -1030,13 +1030,16 @@
       font-size: 0.9em;
       margin-top: 15px;
       }
-      /* ====== LIGHT MODE STYLES ====== */
+      /* ====== LIGHT MODE STYLES (LOADING SCREENS) ====== */
       body.light-mode .loading-screen {
       background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
       }
       body.light-mode .loading-content {
       color: #333;
       }
+      body.light-mode .loading-logo img {
+      filter: brightness(0%); /* Jadi hitam di light mode */
+      }		
       body.light-mode .loading-text h3 {
       color: #007acc; /* Light mode color */
       }
@@ -1067,6 +1070,39 @@
       .loading-progress,
       .loading-text p {
       transition: all 0.5s ease;
+      }	
+      /* ====== LANGUAGE SWITCHER ====== */
+      .language-switcher {
+      margin-left: 20px;
+      }
+      .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85em;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      }
+      .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+      }
+      .lang-icon {
+      font-size: 1em;
+      }
+      /* Light Mode Styles */
+      body.light-mode .lang-btn {
+      color: #333;
+      border-color: rgba(0, 0, 0, 0.3);
+      }
+      body.light-mode .lang-btn:hover {
+      background: rgba(0, 0, 0, 0.05);
       }		
       /* ====== FOOTER ====== */
       footer {
@@ -1097,7 +1133,8 @@
       /* Light Mode - Invert setiap logo biar kelihatan */
       body.light-mode nav img,
       body.light-mode footer img {
-      filter: brightness(0%); /* Jadi hitam di light mode */	  
+      filter: brightness(0%);
+      } 
       /* ====== RESPONSIVE ====== */
       @media (max-width: 768px) {
       nav img { left: 20px; }
@@ -1143,15 +1180,15 @@
       <div class="sidebar-content">
         <div class="cycle-item active">
           <span class="cycle-number">Cycle 12</span>
-          <span class="cycle-name">Misahin Portofolio dan nambah Section(AskMe)</span>
+          <span class="cycle-name">Adding Translation Button, Separating Portofolio</span>
           <span class="cycle-date">Current</span>
         </div>
-      <div class="cycle-item">
+        <div class="cycle-item">
           <span class="cycle-number">Cycle 11</span>
           <span class="cycle-name">Section Update(Portofolio)</span>
           <span class="cycle-date">Selasa, 2 November 2025</span>
           <a href="Cycle 11.html" target="_blank" class="cycle-link"></a>
-        </div>   		  
+        </div>
         <div class="cycle-item">
           <span class="cycle-number">Cycle 10</span>
           <span class="cycle-name">Feature Update(Theme,BGM,Download button)</span>
@@ -1184,13 +1221,13 @@
         </div>
         <div class="cycle-item">
           <span class="cycle-number">Cycle 5</span>
-          <span class="cycle-name">Penambahan Logo, Bugfixing</span>
+          <span class="cycle-name">Adding Logo</span>
           <span class="cycle-date">Minggu, 12 Oktober 2025</span>
           <a href="Cycle 5.html" target="_blank" class="cycle-link"></a>
         </div>
         <div class="cycle-item">
           <span class="cycle-number">Cycle 4</span>
-          <span class="cycle-name">Design Awal</span>
+          <span class="cycle-name">Early Design</span>
           <span class="cycle-date">Minggu, 12 Oktober 2025</span>
           <a href="Cycle 4.html" target="_blank" class="cycle-link"></a>
         </div>
@@ -1225,8 +1262,8 @@
     <section id="portfolio">
       <h2>Portfolio</h2>
       <div class="port-card">
-        <p align="left"> Selain mempelajari teknologi, saya juga punya ketertarikan sebagai content creator YouTube, di mana saya berubah dari yang biasanya troubleshoot jaringan jadi troubleshoot timeline editing!
-          Di sini saya tunjukkan proses behind-the-scenes yang jarang orang liat, dari ngerekam klip aneh-aneh, sampe begadang editing. 
+        <p align="left"> Selain mempelajari teknologi, saya juga punya ketertarikan sebagai content creator YouTube.
+          Di sini saya pengen nunjukin proses behind-the-scenes yang jarang orang liat, dari ngerekam klip aneh-aneh, sampe begadang editing. 
         </p>
         <!-- Gallery Grid -->
         <div class="portfolio-gallery">
@@ -1277,9 +1314,9 @@
         <div class="video-showcase">
           <div class="port-card">
             <h3>🎉 Final Result: </h3>
-            <p>Setelah semua proses di atas, ini dia hasil akhirnya, Semoga menghibur dan jangan lupa subscribe! 😉</p>
+            <p>Setelah semua proses di atas, ini dia hasil akhirnya, Semoga menghibur dan jangan lupa subscribe! 😉 (Note:Video dibawah mengandung Explicit content)</p>
             <div>
-              <!-- Ganti YOUR_VIDEO_ID dengan ID YouTube-mu -->
+              <!-- link youtube masuk sini -->
               <iframe width="560" height="315" src="https://www.youtube.com/embed/SAnDbqHbN8k?si=Z-1Rni5Zl12vuIUD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
               </iframe>
             </div>
@@ -1316,6 +1353,13 @@
       <a href="https://www.youtube.com/@litchflick" target="_blank">
       <img src="—Pngtree—youtube white icon_3570413.png" alt="YouTube" /> Litch Flick
       </a>
+      <!-- Tombol Translate -->
+      <div class="language-switcher">
+        <button id="language-toggle" class="lang-btn">
+        <span class="lang-text">ID</span>
+        <span class="lang-icon">🌐</span>
+        </button>
+      </div>
     </footer>
     <!-- Placeholder for future JavaScript -->
     <script>
@@ -1627,21 +1671,21 @@
         });
       });
       
-// Comprehensive Loading Screen - Handles all navigation scenarios
-document.addEventListener('DOMContentLoaded', function() {
-    const loadingScreen = document.getElementById('loading-screen');
-    
-    // Apply theme consistency
-    if (sessionStorage.getItem('previousTheme') === 'light') {
+      // Comprehensive Loading Screen - Handles all navigation scenarios
+      document.addEventListener('DOMContentLoaded', function() {
+      const loadingScreen = document.getElementById('loading-screen');
+      
+      // Apply theme consistency
+      if (sessionStorage.getItem('previousTheme') === 'light') {
         document.body.classList.add('light-mode');
         const themeToggle = document.getElementById('theme-mode-toggle');
         if (themeToggle) themeToggle.checked = true;
         const themeIcon = document.querySelector('.theme-icon');
         if (themeIcon) themeIcon.textContent = '☀️';
-    }
-    
-    // INTERCEPT ALL NAVIGATION CLICKS
-    document.addEventListener('click', function(e) {
+      }
+      
+      // INTERCEPT ALL NAVIGATION CLICKS
+      document.addEventListener('click', function(e) {
         const link = e.target.closest('a');
         
         if (link && link.href) {
@@ -1669,9 +1713,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Let the default anchor behavior happen
             }
         }
-    });
-    
-    function showLoading(destination) {
+      });
+      
+      function showLoading(destination) {
         // Save current theme state
         sessionStorage.setItem('previousTheme', 
             document.body.classList.contains('light-mode') ? 'light' : 'dark');
@@ -1684,22 +1728,111 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             window.location.href = destination;
         }, 800);
-    }
-    
-    // Hide loading when page fully loads
-    window.addEventListener('load', function() {
+      }
+      
+      // Hide loading when page fully loads
+      window.addEventListener('load', function() {
         setTimeout(() => {
             loadingScreen.classList.remove('active');
             document.body.style.overflow = '';
         }, 300);
-    });
-    
-    // Fallback safety
-    setTimeout(() => {
+      });
+      
+      // Fallback safety
+      setTimeout(() => {
         loadingScreen.classList.remove('active');
         document.body.style.overflow = '';
-    }, 3000);
-});
+      }, 3000);
+      });
+      // ====== LANGUAGE TRANSLATION FUNCTIONALITY ======
+      document.addEventListener('DOMContentLoaded', function() {
+      const languageToggle = document.getElementById('language-toggle');
+      const langText = document.querySelector('.lang-text');
+      
+      // Check saved language preference
+      const isEnglish = localStorage.getItem('language') === 'en';
+      
+      // Apply saved language
+      if (isEnglish) {
+      translatePortfolioToEnglish();
+      langText.textContent = 'EN';
+      }
+      
+      // Language toggle event
+      languageToggle.addEventListener('click', function() {
+      if (langText.textContent === 'ID') {
+      translatePortfolioToEnglish();
+      langText.textContent = 'EN';
+      localStorage.setItem('language', 'en');
+      } else {
+      translatePortfolioToIndonesian();
+      langText.textContent = 'ID';
+      localStorage.setItem('language', 'id');
+      }
+      });
+      
+      function translatePortfolioToEnglish() {
+      // Portfolio Section
+      document.querySelector('#portfolio h2').textContent = "Portfolio";
+      document.querySelector('.port-card p').innerHTML = 
+      "Besides studying technology, I also have an interest as a YouTube content creator. Here I want to show the behind-the-scenes process that people rarely see, from recording various clips to staying up late editing.";
+      
+      // Gallery Items
+      document.querySelectorAll('.gallery-caption h4')[0].textContent = "Stage 1: Planning Content";
+      document.querySelectorAll('.gallery-caption p')[0].textContent = "Looking for ideas for content to create";
+      
+      document.querySelectorAll('.gallery-caption h4')[1].textContent = "Stage 2: Setting OBS";
+      document.querySelectorAll('.gallery-caption p')[1].textContent = "Setting up OBS for smooth recording";
+      
+      document.querySelectorAll('.gallery-caption h4')[2].textContent = "Stage 3: Recording";
+      document.querySelectorAll('.gallery-caption p')[2].textContent = "Recording gameplay";
+      
+      document.querySelectorAll('.gallery-caption h4')[3].textContent = "Stage 4: Editing Video";
+      document.querySelectorAll('.gallery-caption p')[3].textContent = "Editing videos to make them enjoyable to watch";
+      
+      document.querySelectorAll('.gallery-caption h4')[4].textContent = "Stage 5: Editing Thumbnail";
+      document.querySelectorAll('.gallery-caption p')[4].textContent = "Editing thumbnails to look cooler";
+      
+      document.querySelectorAll('.gallery-caption h4')[5].textContent = "Stage 6: Upload to YouTube";
+      document.querySelectorAll('.gallery-caption p')[5].textContent = "Directly upload to YouTube";
+      
+      // Video Section
+      document.querySelector('.video-showcase h3').textContent = "🎉 Final Result:";
+      document.querySelector('.video-showcase p').textContent = 
+      "After all the processes above, here's the final result. Hope it's entertaining and don't forget to subscribe! 😉 (Note: The video below contains explicit content)";
+      }
+      
+      function translatePortfolioToIndonesian() {
+      // Portfolio Section
+      document.querySelector('#portfolio h2').textContent = "Portfolio";
+      document.querySelector('.port-card p').innerHTML = 
+      "Selain mempelajari teknologi, saya juga punya ketertarikan sebagai content creator YouTube. Di sini saya pengen nunjukin proses behind-the-scenes yang jarang orang liat, dari ngerekam klip aneh-aneh, sampe begadang editing.";
+      
+      // Gallery Items
+      document.querySelectorAll('.gallery-caption h4')[0].textContent = "Stage 1: Planning Content";
+      document.querySelectorAll('.gallery-caption p')[0].textContent = "Nyari ide untuk konten yang mau dibuat";
+      
+      document.querySelectorAll('.gallery-caption h4')[1].textContent = "Stage 2: Setting OBS";
+      document.querySelectorAll('.gallery-caption p')[1].textContent = "Nyetting OBS biar smooth pas ngerecord konten";
+      
+      document.querySelectorAll('.gallery-caption h4')[2].textContent = "Stage 3: Recording";
+      document.querySelectorAll('.gallery-caption p')[2].textContent = "Record gameplay";
+      
+      document.querySelectorAll('.gallery-caption h4')[3].textContent = "Stage 4: Editing Video";
+      document.querySelectorAll('.gallery-caption p')[3].textContent = "Mengedit video biar enak ditonton";
+      
+      document.querySelectorAll('.gallery-caption h4')[4].textContent = "Stage 5: Editing Thumbnail";
+      document.querySelectorAll('.gallery-caption p')[4].textContent = "Ngedit thumbnail biar keliatan lebih kece.";
+      
+      document.querySelectorAll('.gallery-caption h4')[5].textContent = "Stage 6: Upload ke Youtube";
+      document.querySelectorAll('.gallery-caption p')[5].textContent = "Langsung upload ke Youtube";
+      
+      // Video Section
+      document.querySelector('.video-showcase h3').textContent = "🎉 Final Result:";
+      document.querySelector('.video-showcase p').textContent = 
+      "Setelah semua proses di atas, ini dia hasil akhirnya, Semoga menghibur dan jangan lupa subscribe! 😉 (Note:Video dibawah mengandung Explicit content)";
+      }
+      });		
     </script>
   </body>
 </html>
