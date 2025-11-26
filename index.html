@@ -874,6 +874,7 @@
       align-items: start;
       max-width: 1200px; /* Kembali ke width normal */
       margin: 30px auto;
+	  margin-top: -35px;	  
       padding: 0 20px;
       }
       .map-section {
@@ -926,7 +927,7 @@
       /* BUTTON THEME COLORS */
       .contact-form button {
       padding: 15px;
-      background: #1db954; /* Dark mode: HIJAU */
+      background: #1db954; 
       color: white;
       border: none;
       border-radius: 8px;
@@ -938,17 +939,17 @@
       width: 100%;
       }
       .contact-form button:hover {
-      background: #1ed760; /* Dark mode: HIJAU terang */
+      background: #1ed760; 
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
       }
       /* Light Mode - Button jadi BIRU */
       body.light-mode .contact-form button {
-      background: #007acc; /* Light mode: BIRU */
+      background: #007acc; 
       box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
       }
       body.light-mode .contact-form button:hover {
-      background: #0088e6; /* Light mode: BIRU terang */
+      background: #0088e6; 
       box-shadow: 0 6px 20px rgba(0, 122, 204, 0.4);
       }
       .alt-contacts {
@@ -1049,16 +1050,16 @@
       color: #333;
       }
       body.light-mode .loading-logo img {
-      filter: brightness(0%); /* Jadi hitam di light mode */
+      filter: brightness(0%); /* di invert */
       }
       body.light-mode .loading-text h3 {
-      color: #007acc; /* Light mode color */
+      color: #007acc; 
       }
       body.light-mode .loading-bar {
       background: rgba(0, 0, 0, 0.1);
       }
       body.light-mode .loading-progress {
-      background: linear-gradient(90deg, #007acc, #0088e6); /* Light mode gradient */
+      background: linear-gradient(90deg, #007acc, #0088e6); 
       }
       body.light-mode .loading-text p {
       color: #666;
@@ -1083,9 +1084,12 @@
       transition: all 0.5s ease;
       }	
       /* ====== LANGUAGE SWITCHER ====== */
-      .language-switcher {
-      margin-left: 20px;
-      }
+	  .language-switcher {
+  	  position: absolute;
+  	  right: 20px;
+  	  bottom: 50%; 
+  	  transform: translateY(50%);
+ 	  }
       .lang-btn {
       display: flex;
       align-items: center;
@@ -1369,7 +1373,6 @@
     </section>
     <!-- ASK ME -->
     <section id="askme">
-      <h2>Ask Me!</h2>
       <div class="askme-container">
         <!-- Kiri: Google Maps -->
         <div class="map-section">
@@ -1929,7 +1932,6 @@
       document.querySelectorAll('.profile-right .skills li')[4].textContent = "Time Management";
       
       // Ask Me Section
-      document.querySelector('#askme h2').textContent = "Ask Me!";
       document.querySelector('.map-section h3').textContent = "📍 Find Me Here";
       document.querySelector('.alt-contacts p').textContent = "Or contact me directly:";
       
@@ -1956,7 +1958,7 @@
       document.querySelectorAll('.skill-name')[1].textContent = "Hardware";
       document.querySelectorAll('.skill-name')[2].textContent = "Software";
       document.querySelectorAll('.skill-name')[3].textContent = "Troubleshooting";
-      document.querySelector('.cta-btn').textContent = "See Full Profile →";
+      document.querySelector('.cta-btn').textContent = "Lihat Profile →";
       
       // Profile Section
       document.querySelector('#profile h2').textContent = "Profile";
@@ -1992,15 +1994,14 @@
       document.querySelectorAll('.profile-right .skills li')[4].textContent = "Time Management";
       
       // Ask Me Section
-      document.querySelector('#askme h2').textContent = "Ask Me!";
-      document.querySelector('.map-section h3').textContent = "📍 Find Me Here";
+      document.querySelector('.map-section h3').textContent = "📍 Saya ada disini";
       document.querySelector('.alt-contacts p').textContent = "Atau hubungi saya langsung:";
       
-      document.querySelector('.form-section h3').textContent = "💬 Send Me a Message";
-      document.querySelectorAll('.contact-form input')[0].placeholder = "Your Name";
-      document.querySelectorAll('.contact-form input')[1].placeholder = "Your Email";
-      document.querySelector('.contact-form textarea').placeholder = "Your Message...";
-      document.querySelector('.contact-form button').textContent = "Send Message";
+      document.querySelector('.form-section h3').textContent = "💬 Kirimi saya pesan";
+      document.querySelectorAll('.contact-form input')[0].placeholder = "Nama";
+      document.querySelectorAll('.contact-form input')[1].placeholder = "Email";
+      document.querySelector('.contact-form textarea').placeholder = "Pesan yang mau disampaikan...";
+      document.querySelector('.contact-form button').textContent = "Kirim Pesan";
       }
       });		
       

@@ -745,6 +745,7 @@
       }
       /* ====== PORTFOLIO ====== */
       #portfolio {
+	  margin-top: -36px;	  
       background: linear-gradient(160deg, #1b1b1b, #0f0f0f);
       }
       .port-card {
@@ -861,7 +862,7 @@
       grid-template-columns: 1fr 1.5fr; /* Maps 1 bagian, Form 1.5 bagian */
       gap: 40px;
       align-items: start;
-      max-width: 1200px; /* Kembali ke width normal */
+      max-width: 1200px; 
       margin: 30px auto;
       padding: 0 20px;
       }
@@ -915,7 +916,7 @@
       /* BUTTON THEME COLORS */
       .contact-form button {
       padding: 15px;
-      background: #1db954; /* Dark mode: HIJAU */
+      background: #1db954; 
       color: white;
       border: none;
       border-radius: 8px;
@@ -933,11 +934,11 @@
       }
       /* === LIGHT MODE STYLES (Button jadi BIRU) === */
       body.light-mode .contact-form button {
-      background: #007acc; /* Light mode: BIRU */
+      background: #007acc; 
       box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
       }
       body.light-mode .contact-form button:hover {
-      background: #0088e6; /* Light mode: BIRU terang */
+      background: #0088e6; 
       box-shadow: 0 6px 20px rgba(0, 122, 204, 0.4);
       }
       .alt-contacts {
@@ -1008,7 +1009,7 @@
       .loading-text h3 {
       margin-bottom: 20px;
       font-size: 1.5em;
-      color: #1db954; /* Dark mode color */
+      color: #1db954; 
       }
       .loading-bar {
       width: 300px;
@@ -1041,13 +1042,13 @@
       filter: brightness(0%); /* Jadi hitam di light mode */
       }		
       body.light-mode .loading-text h3 {
-      color: #007acc; /* Light mode color */
+      color: #007acc; 
       }
       body.light-mode .loading-bar {
       background: rgba(0, 0, 0, 0.1);
       }
       body.light-mode .loading-progress {
-      background: linear-gradient(90deg, #007acc, #0088e6); /* Light mode gradient */
+      background: linear-gradient(90deg, #007acc, #0088e6); 
       }
       body.light-mode .loading-text p {
       color: #666;
@@ -1063,7 +1064,7 @@
       50% { transform: translateX(0%); }
       100% { transform: translateX(100%); }
       }
-      /* Smooth transitions for theme switching */
+      /* biar smooth transisinya */
       .loading-screen,
       .loading-text h3,
       .loading-bar,
@@ -1072,9 +1073,12 @@
       transition: all 0.5s ease;
       }	
       /* ====== LANGUAGE SWITCHER ====== */
-      .language-switcher {
-      margin-left: 20px;
-      }
+ 	  .language-switcher {
+      position: absolute;
+      right: 20px;
+      bottom: 50%; 
+   	  transform: translateY(50%);
+ 	  } 
       .lang-btn {
       display: flex;
       align-items: center;
@@ -1799,7 +1803,7 @@
       // Video Section
       document.querySelector('.video-showcase h3').textContent = "🎉 Final Result:";
       document.querySelector('.video-showcase p').textContent = 
-      "After all the processes above, here's the final result. Hope it's entertaining and don't forget to subscribe! 😉 (Note: The video below contains explicit content)";
+      "After all the processes above, here's the final result. Hope it's entertaining and don't forget to subscribe! 😉 (Note: The video below contains Explicit content)";
       }
       
       function translatePortfolioToIndonesian() {
